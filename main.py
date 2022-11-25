@@ -1290,16 +1290,20 @@ import re
 # reg = r'(([a-z0-9-]{2,}\.)+[a-z]{2,4})'
 # print(re.sub(reg, r"http://\1", s))
 
+
+# ДЗ № 22-1
 test = "1X, Text, ACC 123 A1B2C3"
-reg = r"(?:\d)*(?:^\W)*(?:\d)+"
-reg1 = r'(?:\A\d)'
-reg2 = r"\d{1}[^\d{1,3}^\w]"
+reg4 = r'(\D|\d{3})'
 
-print(re.findall(reg,  test))
-print(re.findall(reg1,  test))
-print(re.findall(reg2,  test))
+# print(re.findall(reg4, test))
+# print(re.sub(reg4, r'', test))
+st = re.sub(reg4, r'', test)
+s = list(st)
+print(s)
+print(list(re.sub(reg4, r'', test)))
 
 
+# ДЗ №22-2
 # txt1 = "#START# tile #END#"
 # reg = r'[a-z]{4}'
 # print(re.findall(reg, txt1))
@@ -1307,21 +1311,85 @@ print(re.findall(reg2,  test))
 # reg2 = r'#[A-Z]+#'
 # print(re.sub(reg2, r'', txt1))
 
+# ДЗ № 22-3
 # dig = "12_34__56"
 # reg = r'\A\d{2}'
-#
 # print(re.findall(reg, dig))
 
+# def elevator(n):
+#     if n == 0:
+#         print("Вы в подвале")
+#         return
+#
+#     print("=>", n)
+#     elevator(n - 1)
+#     print(n, end=' ')
+#
+#
+# n1 = int(input("На каком Вы этаже"))
+# elevator(n1)
+
+# def sum_list(lst):
+#     res = 0
+#     for i in lst:
+#         res = res + i
+#     return res
+#
+#
+# print(sum_list([1, 3, 5, 7, 9]))
 
 
+# def to_str(n, base):
+#     convert = "0123456789"
+#     if n < base:
+#         return convert[n]
+#     else:
+#         return to_str(n // base, base) + convert[n % base]
+#
+#
+# print(to_str(4, 2))
+
+names = ['Adam', ['Bob', ['Chet', 'Cat'], 'Bard', 'Bert'], 'Alex', ['Bea', 'Bill'], 'Ann']
 
 
+# print(type(names[0]) == str)
+# print(type(names[0]) == list)
+# print(names[0])
+# print(isinstance(names[0], list))
+# print(names[1][1])
+# print(isinstance(names[1][1], list))
+# print(names[1][1][0])
+# print(isinstance(names[1][1][0], list))
 
+# def count(lst):
+#     cnt = 0
+#     for i in lst:
+#         if isinstance(i, list):
+#             cnt += count(i)
+#
+#         else:
+#             cnt += 1
+#     return cnt
+#
+#
+# print(count(names))
 
+# def union(s):
+#     if not s:  # s == []:
+#         return s
+#     if isinstance(s[0], list):
+#         return union(s[0]) + union(s[1:])
+#     return s[:1] + union(s[1:])
+#
+#
+# print("Выпрямленный список:", union(names))
 
-
-
-
-
-
-
+# def remove(text):
+#     if not text:
+#         return ""
+#     if text[0] == "\t" or text[0] == " ":
+#         return remove(text[1:])
+#     else:
+#         return text[0] + remove(text[1:])
+#
+# print(remove(" Hello\tWorld  "))
