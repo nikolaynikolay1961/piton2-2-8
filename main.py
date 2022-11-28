@@ -1292,15 +1292,15 @@ import re
 
 
 # ДЗ № 22-1
-test = "1X, Text, ACC 123 A1B2C3"
-reg4 = r'(\D|\d{3})'
-
-# print(re.findall(reg4, test))
-# print(re.sub(reg4, r'', test))
-st = re.sub(reg4, r'', test)
-s = list(st)
-print(s)
-print(list(re.sub(reg4, r'', test)))
+# test = "1X, Text, ACC 123 A1B2C3"
+# reg4 = r'(\D|\d{3})'
+#
+# # print(re.findall(reg4, test))
+# # print(re.sub(reg4, r'', test))
+# st = re.sub(reg4, r'', test)
+# s = list(st)
+# print(s)
+# print(list(re.sub(reg4, r'', test)))
 
 
 # ДЗ №22-2
@@ -1315,6 +1315,8 @@ print(list(re.sub(reg4, r'', test)))
 # dig = "12_34__56"
 # reg = r'\A\d{2}'
 # print(re.findall(reg, dig))
+
+# РЕКУРСИЯ
 
 # def elevator(n):
 #     if n == 0:
@@ -1335,9 +1337,16 @@ print(list(re.sub(reg4, r'', test)))
 #         res = res + i
 #     return res
 #
-#
 # print(sum_list([1, 3, 5, 7, 9]))
 
+
+# def sum_list(lst):
+#     if len(lst) == 1:
+#         return lst[0]
+#     else:
+#         return lst[0] + sum_list(lst[1:])
+#
+# print(sum_list([1, 3, 5, 7, 9]))
 
 # def to_str(n, base):
 #     convert = "0123456789"
@@ -1349,7 +1358,7 @@ print(list(re.sub(reg4, r'', test)))
 #
 # print(to_str(4, 2))
 
-names = ['Adam', ['Bob', ['Chet', 'Cat'], 'Bard', 'Bert'], 'Alex', ['Bea', 'Bill'], 'Ann']
+# names = ['Adam', ['Bob', ['Chet', 'Cat'], 'Bard', 'Bert'], 'Alex', ['Bea', 'Bill'], 'Ann']
 
 
 # print(type(names[0]) == str)
@@ -1393,3 +1402,57 @@ names = ['Adam', ['Bob', ['Chet', 'Cat'], 'Bard', 'Bert'], 'Alex', ['Bea', 'Bill
 #         return text[0] + remove(text[1:])
 #
 # print(remove(" Hello\tWorld  "))
+
+
+
+# ДЗ № 22-1
+# names = ['Adam', ['Bob', ['Chet', 'Cat'], 'Bard', 'Bert'], 'Alex', ['Bea', 'Bill'], 'Ann']
+# print(len(names))
+# s = []
+# for i in range(len(names)):
+#     if type(names[i]) == str:
+#         s.append(names[i])
+#     else:
+#         for j in range(len(names[i])):
+#             if type(names[i][j]) == str:
+#                 s.append(names[i][j])
+#             else:
+#                 for k in range(len(names[i][j])):
+#                     if type(names[i][j][k]) == str:
+#                         s.append(names[i][j][k])
+#
+# print(s)
+
+
+
+
+# ДЗ № 22-2
+s = []
+
+
+def minus(sp):
+    if not sp:
+        return print(len(s))
+    if sp[0] < 0:
+        s.append(sp[0])
+        print(s)
+    return s, minus(sp[1:])
+    # s.append(sp[0])
+    # print(s)
+    # return minus(sp[1:])
+
+
+minus([-2, 3, 8, -11, -4, 6])
+
+# sp = [-2, 3, 8, -11, -4, 6]
+# c = []
+# for i in range(len(sp)):
+#     if sp[i] < 0:
+#         c.append(sp[i])
+# print(c)
+
+
+# for i in sp:
+#     if i < 0:
+#         c.append(i)
+# print(c)
