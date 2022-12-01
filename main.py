@@ -1316,7 +1316,7 @@ import re
 # reg = r'\A\d{2}'
 # print(re.findall(reg, dig))
 
-# РЕКУРСИЯ
+# РЕКУРСИЯ ****************************************************************************
 
 # def elevator(n):
 #     if n == 0:
@@ -1330,7 +1330,7 @@ import re
 #
 # n1 = int(input("На каком Вы этаже"))
 # elevator(n1)
-
+#                     ****************************************
 # def sum_list(lst):
 #     res = 0
 #     for i in lst:
@@ -1347,7 +1347,7 @@ import re
 #         return lst[0] + sum_list(lst[1:])
 #
 # print(sum_list([1, 3, 5, 7, 9]))
-
+#                          ***********************************************
 # def to_str(n, base):
 #     convert = "0123456789"
 #     if n < base:
@@ -1357,6 +1357,8 @@ import re
 #
 #
 # print(to_str(4, 2))
+
+#                    **********************************************
 
 # names = ['Adam', ['Bob', ['Chet', 'Cat'], 'Bard', 'Bert'], 'Alex', ['Bea', 'Bill'], 'Ann']
 
@@ -1404,8 +1406,7 @@ import re
 # print(remove(" Hello\tWorld  "))
 
 
-
-# ДЗ № 22-1
+# ДЗ № 23-1
 # names = ['Adam', ['Bob', ['Chet', 'Cat'], 'Bard', 'Bert'], 'Alex', ['Bea', 'Bill'], 'Ann']
 # print(len(names))
 # s = []
@@ -1424,25 +1425,23 @@ import re
 # print(s)
 
 
-
-
-# ДЗ № 22-2
-s = []
-
-
-def minus(sp):
-    if not sp:
-        return print(len(s))
-    if sp[0] < 0:
-        s.append(sp[0])
-        print(s)
-    return s, minus(sp[1:])
-    # s.append(sp[0])
-    # print(s)
-    # return minus(sp[1:])
-
-
-minus([-2, 3, 8, -11, -4, 6])
+# ДЗ № 23-2
+# s = []
+#
+#
+# def minus(sp):
+#     if not sp:
+#         return print(len(s))
+#     if sp[0] < 0:
+#         s.append(sp[0])
+#         print(s)
+#     return s, minus(sp[1:])
+#     # s.append(sp[0])
+#     # print(s)
+#     # return minus(sp[1:])
+#
+#
+# minus([-2, 3, 8, -11, -4, 6])
 
 # sp = [-2, 3, 8, -11, -4, 6]
 # c = []
@@ -1456,3 +1455,185 @@ minus([-2, 3, 8, -11, -4, 6])
 #     if i < 0:
 #         c.append(i)
 # print(c)
+
+#           ***  файлы ********************************************************
+
+# f = open('text.txt', 'r')
+# # f = open('text.txt', mode='r')  # аналогичная запись
+# print(f)
+# print(*f)  # распаковка файла
+# f.close()
+
+# f = open('text.txt', 'r')
+# print(f.read(3))  # считает первых три символа
+# print(f.read())  # считает остальное
+# f.close()
+
+# f = open('text.txt', 'r')
+# try:
+#     print(f.read())
+# finally:       # даже если файл повреждён 'файнели' всё равно закроет файл
+#     f.close()
+
+
+# f = open('text1.txt', 'r')
+# # print(f.readline())  # считывает построчно до первого переноса на другую строчку
+# print(f.readline(8))
+# print(f.readline())
+# print(f.readline())
+# f.close()
+
+# f = open('text1.txt', 'r')
+# print(f.readlines())  # возвращает список строк
+# f.close()
+
+
+# f = open('text1.txt',  'r')
+# for line in f:
+#     print(line, end='\r')  # end='\r' убирает лишний перенос строки
+# f.close()
+
+# f = open('text1.txt',  'r')
+# count = 0
+# for line in f:
+#     count += 1
+# f.close()
+# print(count)
+
+# f = open('text1.txt',  'r')
+# print(len(f.readlines()))
+# f.close()
+
+# f = open('xyz.txt', 'w')
+# f.write('Привет\nWorld!')
+# f.close()
+
+# f = open('xyz.txt', 'a')  # добавляем новый текст
+# f.write('\nНовый текст')
+# print(f.write('\nНовый текст'))  # возвратит кол-во дописанных символов
+# f.close()
+
+# f = open('xyz.txt', 'a', )
+# # print(f.write('\nНовый текст'))
+# lines = ['\nЛиния 1', '\nЛиния 2']
+# f.writelines(lines)  # берёт эл-ты из списка и добавляет их
+# f.close()
+
+# f = open('xyz.txt', 'w')
+# # lst = [str(i) + str(i - 1) + '\t' for i in range(1, 20)]
+# lst = [str(i) + str(i - 1) for i in range(1, 20)]
+# print(lst)
+# # f.writelines(lst)
+#
+# for index in lst:
+#     f.write(index + '\t')
+# f.close()
+
+# f = open("text2.txt", "w")
+# f.write("Замена строки в текстовом файле;\nизменить строку в списке;\nзаписать список в файл")
+# f.close()
+# #
+# f = open("text2.txt", "r")
+# read_file = f.readlines()  # считает все данные в виде списка
+# print(read_file)
+# for i in range(len(read_file)):
+#     if read_file[i] == 'изменить строку в списке;\n':
+#         read_file[i] = 'Hello world\n'
+# print(read_file)
+# f.close()
+#
+# f = open("text2.txt", "w")
+# f.writelines(read_file)  # заменили текст в файле
+# f.close()
+
+# f = open("text2.txt", "w")
+# f.write("Замена строки в текстовом файле;\nизменить строку в списке;\nзаписать список в файл")
+# f.close()
+#
+# ind = int(input('Введите номер строки'))
+# f = open("text2.txt", "r")
+# read_file = f.readlines()
+# f.close()
+# if 0 > ind - 1 <= len(read_file):
+#     print("Неправильно введён номер")
+#
+# else:
+#     read_file.pop(ind - 1)
+# print(read_file)
+# f = open("text2.txt", "w")
+# f.writelines(read_file)
+# f.close()
+
+
+# f = open('text.txt', 'r')
+# print(f.read(3))
+# print(f.tell())
+# print(f.seek(1))
+# print(f.read())
+# print(f.tell())
+# f.close()
+
+# f = open('text.txt', 'r+')
+# print(f.write("I am learning Python"))
+# print(f.seek(3))
+# print(f.write("--new string--"))  # I a--new string--hon
+# print(f.tell())
+# f.close()
+
+
+# f = open('text.txt', 'a')
+# print(f.write("I am learning Python"))
+# print(f.seek(3))
+# print(f.write("--new string--"))  # I a--new string--hon
+# print(f.tell())
+# f.close()
+
+# f = open('text.txt', 'r+')
+# print(f.write("I am learning Python"))
+# # print(f.seek(3))
+# print(f.write("--new string--"))  # I a--new string--hon
+# print(f.tell())
+# f.close()
+
+
+# f = open("text2.txt", "w")
+# f.write("Замена строки в текстовом файле;\nизменить строку в списке;\nзаписать список в файл")
+# f.close()
+# #
+# f = open("text2.txt", "r")
+# read_file = f.readlines()  # считает все данные в виде списка
+# print(read_file)
+# for i in range(len(read_file)):
+#     if read_file[i] == 'изменить строку в списке;\n':
+#         read_file[i] = 'Hello world\n'
+# print(read_file)
+# f.close()
+
+
+f = open("textdz.txt", "w")
+f.write("Замена строки в текстовом файле;\nизменить строку в списке;\nзаписать список в файл")
+f.close()
+
+pos1 = int(input('Введите номер строки, которую хотите переместить: '))
+pos2 = int(input("С какой строкой хотите поменять местами: "))
+f = open("textdz.txt", "r")
+read_file = f.readlines()
+f.close()
+if 0 > pos1 - 1 and pos2 <= len(read_file):
+    print("Неправильно введён номер")
+
+else:
+    read_file[pos1 - 1], read_file[pos2 - 1] = read_file[pos2 - 1], read_file[pos1 - 1]
+print(read_file)
+print(read_file[1])
+f = open("textdz.txt", "w")
+f.writelines(read_file)
+f.close()
+
+
+
+
+
+
+
+
