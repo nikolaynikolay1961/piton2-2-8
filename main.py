@@ -1596,44 +1596,158 @@ import re
 # f.close()
 
 
-# f = open("text2.txt", "w")
+# f = open("textdz.txt", "w")
 # f.write("Замена строки в текстовом файле;\nизменить строку в списке;\nзаписать список в файл")
 # f.close()
-# #
-# f = open("text2.txt", "r")
-# read_file = f.readlines()  # считает все данные в виде списка
+#
+# pos1 = int(input('Введите номер строки, которую хотите переместить: '))
+# pos2 = int(input("С какой строкой хотите поменять местами: "))
+# f = open("textdz.txt", "r")
+# read_file = f.readlines()
+# f.close()
+# if 0 > pos1 - 1 and pos2 <= len(read_file):
+#     print("Неправильно введён номер")
+#
+# else:
+#     read_file[pos1 - 1], read_file[pos2 - 1] = read_file[pos2 - 1], read_file[pos1 - 1]
 # print(read_file)
-# for i in range(len(read_file)):
-#     if read_file[i] == 'изменить строку в списке;\n':
-#         read_file[i] = 'Hello world\n'
-# print(read_file)
+# print(read_file[1])
+# f = open("textdz.txt", "w")
+# f.writelines(read_file)
 # f.close()
 
+# with open('text5.txt', 'w+') as f:
+#     print(f.write('0123456789'))
 
-f = open("textdz.txt", "w")
-f.write("Замена строки в текстовом файле;\nизменить строку в списке;\nзаписать список в файл")
-f.close()
+# with open('text2.txt', 'r') as f:
+#     for line in f:
+#         print(line[:6])
 
-pos1 = int(input('Введите номер строки, которую хотите переместить: '))
-pos2 = int(input("С какой строкой хотите поменять местами: "))
-f = open("textdz.txt", "r")
-read_file = f.readlines()
-f.close()
-if 0 > pos1 - 1 and pos2 <= len(read_file):
-    print("Неправильно введён номер")
+# file_name = 'res.txt'
+# lst = [4.5, 2.8, 3.9, 1.0, 0.3, 4.33, 7.777]
 
-else:
-    read_file[pos1 - 1], read_file[pos2 - 1] = read_file[pos2 - 1], read_file[pos1 - 1]
-print(read_file)
-print(read_file[1])
-f = open("textdz.txt", "w")
-f.writelines(read_file)
-f.close()
+# def get_line(lt):
+#     lt = list(map(str, lt))
+#     return " ".join(lt)
+#
+#
+# with open(file_name, 'w') as f:
+#     f.write(get_line(lst))
+# print(get_line(lst))
 
 
+# with open(file_name, 'r') as f:
+#     nums = f.read()
+#
+# print(nums)
+#
+# lst = list(map(float, nums.split(' ')))
+# print(lst)
+# print(len(lst))
+
+# Задача: Написать ф-цию, к-рая выводит слово из файла, имеющее макс-ую длину
+#        (или список слов, если таковых несколько)
+
+# def longest_words(file):
+#     with open(file, 'r', encoding='utf-8') as text:
+#         w = text.read().split()
+#         max_length = len(max(w, key=len))  # max(w, key=len) = самое длинное слово
+#         res = [word for word in w if len(word) == max_length]
+#         if len(res) == 1:
+#             return res[0]
+#         return res
+#
+#
+# file_name = 'res.txt'
+# print(longest_words(file_name))
+
+#       ________________________________________________________________________
+
+# text = "Строка №1\nСтрока №2\nСтрока №3\nСтрока №4\nСтрока №5\nСтрока №6\nСтрока №7\nСтрока №8\n"
+#
+# with open("one.txt", 'w') as f:
+#     f.write(text)
+
+# read_file = 'one.txt'
+# write_file = 'two.txt'
+# with open(read_file, 'r') as fr, open(write_file, 'w') as fw:
+#     for line in fr:
+#         line = line.replace("Строка", "Линия - ")
+#         fw.write(line)
+
+# Модуль OS и OS.PATH  *******************************************************************
+
+import os
+
+# print("Текущая директория: ", os.getcwd())
+#
+# print(os.listdir())
+# print(os.listdir(".."))
+# os.mkdir("folder")
+# os.makedirs("nested1/nested2/nested3")
+# os.remove("xyz.txt")
+
+# os.rename('nested1', 'test')  # переименовывает файл или директорию
+# os.rename("test.txt", 'test/test1.txt')
+# os.rmdir("folder")
+
+# print(os.walk("test"))
+# for root, dirs, files in os.walk("test", topdown=True):
+#     print("Root:", root)
+#     print("Subdirs", dirs)
+#     print("Files:", files)
+
+# def remove_empty_dirs(root_tree):
+#     for root, dirs, files in os.walk(root_tree):
+#         if not os.listdir(root):
+#             os.rmdir(root)
+#             print(f"Директория {root} удалена.")
 
 
+# remove_empty_dirs("test")
 
 
+# print(os.path.split())
+# print(os.path.dirname())
+# print(os.path.basename())
+# print(os.path.join())
 
+# dirs = ["Work/F1", "Work/F2/F21"]
+# for d in dirs:
+#     os.makedirs(d)
 
+# files = {'Work': ['w.txt'],
+#          'Work/F1': ['fl1.txt', 'fl2.txt', 'fl3.txt'],
+#          'Work/F2/F21': ['f211.txt', 'f212.txt']
+#          }
+#
+# for d, file in files.items():
+#     for f in file:
+#         file_path = os.path.join(d, f)
+#         open(file_path, 'w').close()
+
+# file_text = ['Work/w.txt', 'Work/F1/fl2.txt', 'Work/F2/F21/f211.txt', 'Work/F2/F21/f212.txt']
+# for file in file_text:
+#     with open(file, 'w') as f:
+#         f.write(f"Текст для файла по пути {file}.")
+
+# DZ **********************************************
+
+# read_file1 = 'one.txt'
+# read_file2 = 'two.txt'
+# write_file = 'union.txt'
+#
+# with open(read_file1, 'r') as f1, open(read_file2, 'r') as f2, open(write_file, 'w') as fw:
+#     for line1, line2 in zip(f1, f2):
+#         line = (str(line1).strip() + ' ' + str(line2).strip() + '\n')
+#
+#         fw.write(line)
+#         print(line)
+
+print("     Обход сверху вниз")
+for root, dirs, files in os.walk('Work', topdown=True):
+    print(root, '\n', '\t', dirs, '\n', '\t', files)
+
+#     print("     Обход снизу вверх:")
+# for root, dirs, files in os.walk('Work', topdown=False):
+#     print(root, '\n', '\t', dirs, '\n', '\t', files)
