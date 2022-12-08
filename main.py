@@ -1744,10 +1744,265 @@ import os
 #         fw.write(line)
 #         print(line)
 
-print("     Обход сверху вниз")
-for root, dirs, files in os.walk('Work', topdown=True):
-    print(root, '\n', '\t', dirs, '\n', '\t', files)
+# print("     Обход сверху вниз")
+# for root, dirs, files in os.walk('Work', topdown=True):
+#     print(root, '\n', '\t', dirs, '\n', '\t', files)
 
 #     print("     Обход снизу вверх:")
 # for root, dirs, files in os.walk('Work', topdown=False):
 #     print(root, '\n', '\t', dirs, '\n', '\t', files)
+# **********************************************************************************************
+
+# грамотное решение
+
+# def print_tree(root, topdown):
+#     print(f"Обход {root} {'Сверху вниз' if topdown else 'Снизу вверх'}")
+#     for root, dirs, files in os.walk(root, topdown=topdown):
+#         print(root, '\n', '\t', dirs, '\n', '\t', files)
+#     print('-' * 50)
+#
+#
+# print_tree('Work', topdown=False)
+# print_tree('Work', topdown=True)
+
+# print(os.path.exists(r'путь к папке'))   # существует ли этот файл
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+import time
+
+
+# path = 'text.txt'
+# # print(os.path.getatime(path))  # возвращает время последнего доступа к файлу в секундах
+# # print(os.path.getctime(path))  # возвращает время создания файла
+# # print(os.path.getmtime(path))  # время последнего изменения файла
+# # print(os.path.getsize(path))  # размер файла в байтах
+# size = os.path.getsize(path) / 1024  # перевод в килобайты
+# print(size)
+# t = os.path.getctime(path)
+# print(time.strftime('%d.%m.%Y, %H:%M.%S', time.localtime(t)))
+#
+#
+# print(os.path.isfile(r"Work\w.txt"))  # является ли документ файлом
+# print(os.path.isdir(r"Work\w.txt"))  #  является ли документ папкой (директорией)
+# если документа не существует, то тоже False
+
+
+# print(os.path.exists(r'C:\Users\Дмитрий\PycharmProjects\pythonProject'))
+# print(os.path.exists('Work'))
+# если путь или папка существует, то True, если нет - то False
+
+# *****************************************************************************
+
+# class Point:
+#     '''Класс для представления координат точек на плоскости'''
+#     x = 1
+#     y = 1
+
+
+# print(Point.__doc__)
+# print(Point.__name__)
+# print(dir(Point))
+
+
+# x = 5
+# p1 = Point()
+# p2 = Point()
+# print("p1 =", p1.x)
+# print("Point =", Point.x)
+#
+# p1.x = 100
+# p2.x = 200
+# print(p1.x)
+# print(p2.x)
+# print(Point.x)
+
+
+# class Point:
+#     x = 1
+#     y = 1
+#
+# p1 = Point()
+# p1.x = 5
+# p1.y = 10
+# p1.z = 20
+# print(p1.x, p1.y)
+# print(p1.__dict__)
+
+
+# class Point:
+#     x = 1
+#     y = 1
+#
+#     def set_coord(self):
+#         print("Метод set_coord")
+#         print(self.__dict__)
+#
+#
+# p1 = Point()
+# print(p1.x)
+# p1.x = 5
+# p1.y = 10
+# p1.set_coord()  # равнозначные записи
+# Point.set_coord(p1)  # ----//----
+
+# class Point:
+#     x = 1
+#     y = 1
+#
+#     def set_coord(self, x, y):
+#         self.x = x  # то есть : p1.x = x, вместо self приходит экземпляр
+#         self.y = y
+#
+#
+# p1 = Point()
+# p1.set_coord(5, 10)
+# print(p1.__dict__)
+# p2 = Point()
+# p2.set_coord(3, 9)
+# print(p2.__dict__)
+# print(p2.x)
+
+# class Human:
+#     name = 'name'
+#     birthday = '00.00.0000'
+#     phone = '00-00-00'
+#     country = 'country'
+#     city = 'city'
+#     address = 'street, house'
+#
+#
+#     def print_info(self):
+#         print('Персональные данные'.center(40, '*'))
+#         print(f"Имя: {self.name}\nДата рождения: {self.birthday}\nНомер телефона: {self.phone}\n"
+#               f"Страна: {self.country}\nГород: {self.city}\nДомашний адрес: {self.address}")
+#         print("_" * 40)
+#
+#     def input_info(self, first_name, birthday, phone, country, city, address):
+#         self.name = first_name
+#         self.birthday = birthday
+#         self.phone = phone
+#         self.country = country
+#         self.city = city
+#         self.address = address
+#
+#     def set_name(self, name):  # установить имя
+#         if isinstance(name, str):
+#             self.name = name
+#
+#     def get_name(self):  # получить имя
+#         return self.name
+#
+#     def set_birthday(self, birthday):
+#         self.birthday = birthday
+#
+#     def get_birthday(self):
+#         return self.birthday
+#
+#     def set_phone(self, phone):
+#         self.phone = phone
+#
+#     def get_phone(self):
+#         return self.phone
+#
+#     def set_country(self, country):
+#         self.country = country
+#
+#     def get_country(self):
+#         return self.country
+#
+#     def set_city(self, city):
+#         self.city = city
+#
+#     def get_city(self):
+#         return self.city
+#
+#     def set_address(self, address):
+#         self.address = address
+#
+#     def get_address(self):
+#         return self.address
+#
+# h1 = Human()
+# h1.print_info()
+# h1.input_info("Юля", "23.05.1986", "45-46-98", "Россия", "Москва", "Чистопрудный бульвар, 1А")
+# h1.print_info()
+# h1.set_name('Алевтина')
+# h1.print_info()
+# print(h1.get_name())
+# h1.set_birthday("30.02.1989")
+# print(h1.get_birthday())
+
+
+class Book:
+    title = 'title'
+    release = 'release'
+    publisher = 'publisher'
+    genre = 'genre'
+    author = 'author'
+    price = 'price'
+    circulation = 'circulation'
+
+    def print_info(self):
+        print('Данные о книге'.center(50, '-'), '\n')
+        print(f"Название: {self.title}\nГод выпуска: {self.release}\nИздатель: {self.publisher}\n"
+              f"Жанр: {self.genre}\nАвтор: {self.author}\nЦена: {self.price}\nТираж: {self.circulation}")
+        print("--+--" * 10)
+
+    def input_info(self, title, release, publisher, genre, author, price, circulation):
+        self.title = title
+        self.release = release
+        self.publisher = publisher
+        self.genre = genre
+        self.author = author
+        self.price = price
+        self.circulation = circulation
+
+    def set_title(self, title):
+        self.title = title
+
+    def get_title(self):
+        return self.title
+
+    def set_release(self, release):
+        self.release = release
+
+    def get_release(self):
+        return self.release
+
+    def set_publisher(self, publisher):
+        self.publisher = publisher
+
+    def get_publisher(self):
+        return self.publisher
+
+    def set_genre(self, genre):
+        self.genre = genre
+
+    def get_genre(self):
+        return self.genre
+
+    def set_author(self, author):
+        self.author = author
+
+    def get_author(self):
+        return self.author
+
+    def set_price(self, price):
+        self.price = price
+
+    def get_price(self):
+        return self.price
+
+    def set_circulation(self, circulation):
+        self.circulation = circulation
+
+    def get_circulation(self):
+        return self.circulation
+
+
+h1 = Book()
+h1.print_info()
+h1.input_info("Орфографический словарь", "1984", 'изд.Просвещение', "учебная литература", "Ушаков", "40 коп.", "2млн")
+h1.print_info()
+h1.set_circulation('3 000 000 экз.')
+h1.print_info()
