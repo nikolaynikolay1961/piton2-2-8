@@ -1005,7 +1005,6 @@
 # print('*'.join(st1))
 # print(x.join(st1))
 # print('*'.join(st.split()))
-import re
 
 # s = 'Я ищу совпадения в 2023 году. И я их найду в 2 счёта'
 # reg = 'я'
@@ -1677,8 +1676,6 @@ import re
 
 # Модуль OS и OS.PATH  *******************************************************************
 
-import os
-
 # print("Текущая директория: ", os.getcwd())
 #
 # print(os.listdir())
@@ -1767,8 +1764,6 @@ import os
 
 # print(os.path.exists(r'путь к папке'))   # существует ли этот файл
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-import time
 
 
 # path = 'text.txt'
@@ -1932,77 +1927,297 @@ import time
 # h1.set_birthday("30.02.1989")
 # print(h1.get_birthday())
 
+#
+# class Book:
+#     title = 'title'
+#     release = 'release'
+#     publisher = 'publisher'
+#     genre = 'genre'
+#     author = 'author'
+#     price = 'price'
+#     circulation = 'circulation'
+#
+#     def print_info(self):
+#         print('Данные о книге'.center(50, '-'), '\n')
+#         print(f"Название: {self.title}\nГод выпуска: {self.release}\nИздатель: {self.publisher}\n"
+#               f"Жанр: {self.genre}\nАвтор: {self.author}\nЦена: {self.price}\nТираж: {self.circulation}")
+#         print("--+--" * 10)
+#
+#     def input_info(self, title, release, publisher, genre, author, price, circulation):
+#         self.title = title
+#         self.release = release
+#         self.publisher = publisher
+#         self.genre = genre
+#         self.author = author
+#         self.price = price
+#         self.circulation = circulation
+#
+#     def set_title(self, title):
+#         self.title = title
+#
+#     def get_title(self):
+#         return self.title
+#
+#     def set_release(self, release):
+#         self.release = release
+#
+#     def get_release(self):
+#         return self.release
+#
+#     def set_publisher(self, publisher):
+#         self.publisher = publisher
+#
+#     def get_publisher(self):
+#         return self.publisher
+#
+#     def set_genre(self, genre):
+#         self.genre = genre
+#
+#     def get_genre(self):
+#         return self.genre
+#
+#     def set_author(self, author):
+#         self.author = author
+#
+#     def get_author(self):
+#         return self.author
+#
+#     def set_price(self, price):
+#         self.price = price
+#
+#     def get_price(self):
+#         return self.price
+#
+#     def set_circulation(self, circulation):
+#         self.circulation = circulation
+#
+#     def get_circulation(self):
+#         return self.circulation
+#
+#
+# h1 = Book()
+# h1.print_info()
+# h1.input_info("Орфографический словарь", "1984", 'изд.Просвещение', "учебная литература", "Ушаков", "40 коп.", "2млн")
+# h1.print_info()
+# h1.set_circulation('3 000 000 экз.')
+# h1.print_info()
 
-class Book:
-    title = 'title'
-    release = 'release'
-    publisher = 'publisher'
-    genre = 'genre'
-    author = 'author'
-    price = 'price'
-    circulation = 'circulation'
 
-    def print_info(self):
-        print('Данные о книге'.center(50, '-'), '\n')
-        print(f"Название: {self.title}\nГод выпуска: {self.release}\nИздатель: {self.publisher}\n"
-              f"Жанр: {self.genre}\nАвтор: {self.author}\nЦена: {self.price}\nТираж: {self.circulation}")
-        print("--+--" * 10)
+# class Person:
+#     skill = 10
+#
+#     def __init__(self, name, surname):
+#         self.name = name
+#         self.surname = surname
+#
+#     def prin_info(self):
+#         print("Данные сотрудника:", self.name, self.surname)
+#
+#     def add_skill(self, k):
+#         self.skill += k
+#         print("Квалификация сотрудника: ", self.skill, '\n')
+#
+#
+# p1 = Person("Viktor", "Reznik")
+# p1.prin_info()
+# p1.add_skill(2)
+#
+# p2 = Person("Anna", "Dolgina")
+# p2.prin_info()
+# p2.add_skill(3)
 
-    def input_info(self, title, release, publisher, genre, author, price, circulation):
-        self.title = title
-        self.release = release
-        self.publisher = publisher
-        self.genre = genre
-        self.author = author
-        self.price = price
-        self.circulation = circulation
-
-    def set_title(self, title):
-        self.title = title
-
-    def get_title(self):
-        return self.title
-
-    def set_release(self, release):
-        self.release = release
-
-    def get_release(self):
-        return self.release
-
-    def set_publisher(self, publisher):
-        self.publisher = publisher
-
-    def get_publisher(self):
-        return self.publisher
-
-    def set_genre(self, genre):
-        self.genre = genre
-
-    def get_genre(self):
-        return self.genre
-
-    def set_author(self, author):
-        self.author = author
-
-    def get_author(self):
-        return self.author
-
-    def set_price(self, price):
-        self.price = price
-
-    def get_price(self):
-        return self.price
-
-    def set_circulation(self, circulation):
-        self.circulation = circulation
-
-    def get_circulation(self):
-        return self.circulation
+#
+# class Point:
+#     # def __new__(cls, *args, **kwargs):
+#     #     print("Конструктор")
+#     #     return super().__new__(cls)
+#
+#     def __init__(self, x, y):
+#         print("Инициализатор")
+#         self.x = x
+#         self.y = y
+#
+#     def __del__(self):
+#         print("Удаление экземпляра", self.__class__.__name__)
+#
+#     def print_coord(self):
+#         print(f"x: {self.x}, y: {self.y}")
 
 
-h1 = Book()
-h1.print_info()
-h1.input_info("Орфографический словарь", "1984", 'изд.Просвещение', "учебная литература", "Ушаков", "40 коп.", "2млн")
-h1.print_info()
-h1.set_circulation('3 000 000 экз.')
-h1.print_info()
+# p1 = Point(5, 10)
+# # print(p1.__dict__)
+# p1.print_coord()
+# print(id(p1))
+#
+# p2 = Point(2, 7)
+# # del p2
+# p2.print_coord()
+# print(id(p2))
+
+# class Point:
+#     count = 0
+#
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+#         Point.count += 1  # а если self.count += 1, то p1.count = 1 у всех р.2, р.3, и т.д.
+#         self.count += 1
+#
+#
+# p1 = Point(5, 10)
+# print(p1.count)
+# p2 = Point(7, 2)
+# print(p2.count)
+# p3 = Point(3, 4)
+# print(p3.count)
+# print(Point.count)
+# print(p3.count)
+
+
+# class Robot:
+#     k = 0
+#
+#     def __init__(self, name):
+#         self.name = name
+#         print("Инициализация робота:", self.name)
+#         Robot.k += 1
+#
+#     def __del__(self):
+#         print(self.name, "выключается")
+#         Robot.k -= 1
+#         if Robot.k == 0:
+#             print(self.name, "был последним")
+#         else:
+#             print('Работающих роботов осталось:', Robot.k)
+#
+#     def say_hi(self):
+#         print("Приветствую. Меня зовут", self.name)
+
+
+# droid1 = Robot('R2-D2')
+# droid1.say_hi()
+# print('Численность роботов:', Robot.k)
+#
+# droid2 = Robot('C-3P0')
+# droid2.say_hi()
+# print('Численность роботов:', Robot.k)
+
+# droid3 = Robot('RP-xP0')
+# droid3.say_hi()
+# print('Численность роботов:', Robot.k)
+#
+# print("\nЗдесь роботы могут проделать какую-то работу\n")
+# print("Роботы завершили свою работу. Давайте их выключим")
+# del droid1
+# del droid2
+# del droid3
+# print('Численность роботов в конце программы:', Robot.k)
+
+# class Point:
+#     def __init__(self, x, y):
+#         self.__x = self.__y = 0
+#         if Point.__check_value(x) and Point.__check_value(y):
+#             self.__x = x
+#             self.__y = y
+#
+#     def __check_value(z):
+#         if isinstance(z, int) or isinstance(z, float):
+#             return True
+#         return False
+#
+#     def set_coord(self, x, y):
+#         if Point.__check_value(x) and Point.__check_value(y):
+#             self.__x = x
+#             self.__y = y
+#         else:
+#             print("Координаты должны быть числами")
+#
+#     def get_coord(self):
+#         return self.__x, self.__y
+
+
+# p1 = Point(5, 10)
+# # print(p1.__x, p1.__y)
+# print(p1.get_coord())
+# p1.set_coord(1, 2)
+# print(p1.get_coord())
+# # p1.__x = 100
+# # p1.__y = 'abc'
+# # print(p1.x, p1.y)
+# print(p1.__dict__)
+
+
+# print(('*' * 7 + '\n') * 3)
+
+class Rectangle:
+    def __init__(self, x, y):
+        self.__x = self.__y = 0
+        if Rectangle.__check_value(x) and Rectangle.__check_value(y):
+            self.__x = x
+            self.__y = y
+
+    def __check_value(z):
+        if isinstance(z, int) or isinstance(z, float):
+            return True
+        return False
+
+    def set_coord(self, x, y):
+        if Rectangle.__check_value(x) and Rectangle.__check_value(y):
+            self.__x = x
+            self.__y = y
+        else:
+            print("Координаты должны быть числами")
+
+    def get_coord(self):
+        return self.__x, self.__y
+
+    def set_coord_x(self, x):
+        if Rectangle.__check_value(x):
+            self.__x = x
+        else:
+            print("Координаты должны быть числами")
+
+    def get_coord_x(self):
+        return print("Высота прямоугольника:", self.__x)
+
+    def set_coord_y(self, y):
+        if Rectangle.__check_value(y):
+            self.__y = y
+        else:
+            print("Координаты должны быть числами")
+
+    def get_coord_y(self):
+        return print("Ширина прямоугольника:", self.__y)
+
+    def square(self):
+        print("Площадь прямоугольника:", self.__x * self.__y)
+
+    def perimetr(self):
+        print("Периметр прямоугольника:", (self.__x + self.__y) * 2)
+
+    def hypotenuse(self):
+        print("Гипотенуза прямоугольника:", round((self.__x ** 2 + self.__y ** 2) ** (1 / 2), 2))
+
+    def picture(self):
+        print(('*' * self.__y + '\n') * self.__x)
+
+
+p1 = Rectangle(3, 9)
+p1.get_coord_x()
+p1.get_coord_y()
+p1.square()
+p1.perimetr()
+p1.hypotenuse()
+p1.picture()
+
+
+
+
+
+
+
+
+
+
+
+
