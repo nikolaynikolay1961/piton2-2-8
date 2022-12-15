@@ -2114,6 +2114,8 @@
 # print('Численность роботов в конце программы:', Robot.k)
 
 # class Point:
+#     __slots__ = ["__x", "__y", "z"]
+#
 #     def __init__(self, x, y):
 #         self.__x = self.__y = 0
 #         if Point.__check_value(x) and Point.__check_value(y):
@@ -2134,10 +2136,12 @@
 #
 #     def get_coord(self):
 #         return self.__x, self.__y
-
-
+#
+#
 # p1 = Point(5, 10)
-# # print(p1.__x, p1.__y)
+# p1.z = 15
+# print(p1.z)
+# print(p1.__x, p1.__y)
 # print(p1.get_coord())
 # p1.set_coord(1, 2)
 # print(p1.get_coord())
@@ -2148,76 +2152,304 @@
 
 
 # print(('*' * 7 + '\n') * 3)
-
-class Rectangle:
-    def __init__(self, x, y):
-        self.__x = self.__y = 0
-        if Rectangle.__check_value(x) and Rectangle.__check_value(y):
-            self.__x = x
-            self.__y = y
-
-    def __check_value(z):
-        if isinstance(z, int) or isinstance(z, float):
-            return True
-        return False
-
-    def set_coord(self, x, y):
-        if Rectangle.__check_value(x) and Rectangle.__check_value(y):
-            self.__x = x
-            self.__y = y
-        else:
-            print("Координаты должны быть числами")
-
-    def get_coord(self):
-        return self.__x, self.__y
-
-    def set_coord_x(self, x):
-        if Rectangle.__check_value(x):
-            self.__x = x
-        else:
-            print("Координаты должны быть числами")
-
-    def get_coord_x(self):
-        return print("Высота прямоугольника:", self.__x)
-
-    def set_coord_y(self, y):
-        if Rectangle.__check_value(y):
-            self.__y = y
-        else:
-            print("Координаты должны быть числами")
-
-    def get_coord_y(self):
-        return print("Ширина прямоугольника:", self.__y)
-
-    def square(self):
-        print("Площадь прямоугольника:", self.__x * self.__y)
-
-    def perimetr(self):
-        print("Периметр прямоугольника:", (self.__x + self.__y) * 2)
-
-    def hypotenuse(self):
-        print("Гипотенуза прямоугольника:", round((self.__x ** 2 + self.__y ** 2) ** (1 / 2), 2))
-
-    def picture(self):
-        print(('*' * self.__y + '\n') * self.__x)
-
-
-p1 = Rectangle(3, 9)
-p1.get_coord_x()
-p1.get_coord_y()
-p1.square()
-p1.perimetr()
-p1.hypotenuse()
-p1.picture()
+#
+# class Rectangle:
+#     def __init__(self, x, y):
+#         self.__x = self.__y = 0
+#         if Rectangle.__check_value(x) and Rectangle.__check_value(y):
+#             self.__x = x
+#             self.__y = y
+#
+#     def __check_value(z):
+#         if isinstance(z, int) or isinstance(z, float):
+#             return True
+#         return False
+#
+#     def set_coord(self, x, y):
+#         if Rectangle.__check_value(x) and Rectangle.__check_value(y):
+#             self.__x = x
+#             self.__y = y
+#         else:
+#             print("Координаты должны быть числами")
+#
+#     def get_coord(self):
+#         return self.__x, self.__y
+#
+#     def set_coord_x(self, x):
+#         if Rectangle.__check_value(x):
+#             self.__x = x
+#         else:
+#             print("Координаты должны быть числами")
+#
+#     def get_coord_x(self):
+#         return print("Высота прямоугольника:", self.__x)
+#
+#     def set_coord_y(self, y):
+#         if Rectangle.__check_value(y):
+#             self.__y = y
+#         else:
+#             print("Координаты должны быть числами")
+#
+#     def get_coord_y(self):
+#         return print("Ширина прямоугольника:", self.__y)
+#
+#     def square(self):
+#         print("Площадь прямоугольника:", self.__x * self.__y)
+#
+#     def perimetr(self):
+#         print("Периметр прямоугольника:", (self.__x + self.__y) * 2)
+#
+#     def hypotenuse(self):
+#         print("Гипотенуза прямоугольника:", round((self.__x ** 2 + self.__y ** 2) ** (1 / 2), 2))
+#
+#     def picture(self):
+#         print(('*' * self.__y + '\n') * self.__x)
 
 
+# p1 = Rectangle(3, 9)
+# p1.get_coord_x()
+# p1.get_coord_y()
+# p1.square()
+# p1.perimetr()
+# p1.hypotenuse()
+# p1.picture()
 
 
+#
+#
+# p1 = Point(5, 10)
+# p1.x = 100
+# print(p1.x)
+# del p1.x
+# print()
 
 
+# class Point:
+#     def __init__(self, x=0, y=0):
+#         self.__x = x
+#         self.__y = y
+#
+#     @property
+#     def x(self):  # получаем __get_x
+#         print("Вызов __get_x")
+#         return self.__x
+#
+#     @x.setter
+#     def x(self, x):  # Устанавливаем __set_x
+#         print("Вызов __set_x")
+#         self.__x = x
+#
+#     @x.deleter
+#     def x(self):
+#         print("Удаление свойства")
+#         del self.__x
+
+# x = property(__get_x, __set_x, __del_x)
 
 
+# p1 = Point(5, 10)
+# p1.x = 100
+# print(p1.__dict__)
+# print(p1.x)
+# del p1.x
+# print()
+
+# class KgToPounds:
+#     def __init__(self, kg):
+#         self.__kg = kg
+#
+#     @property
+#     def kg(self):
+#         return self.__kg
+#
+#     @kg.setter
+#     def kg(self, new_kg):
+#         if isinstance(new_kg, (int, float)):
+#             self.__kg = new_kg
+#         else:
+#             print("Килограммы задаются только числами")
+#
+#     def to_pounds(self):
+#         return self.__kg * 2.2046
+#
+#
+# weight = KgToPounds(12)  # экземпляр класса
+# print(weight.kg, "кг =>", end=" ")
+# print(weight.to_pounds(), "фунтов")
+# weight.kg = 2.3
+# print(weight.kg, "кг =>", end=" ")
+# print(weight.to_pounds(), "фунтов")
 
 
+# class Person:
+#     def __init__(self, name, skill):
+#         self.__name = name
+#         self.__skill = skill
+#
+#     @property
+#     def name(self):
+#         return self.__name
+#
+#     @name.setter
+#     def name(self, name):
+#         self.__name = name
+#
+#     @name.deleter
+#     def name(self, name):
+#         del self.__name
+#
+#     @property
+#     def skill(self):
+#         return self.__skill
+#
+#     @skill.setter
+#     def skill(self, skill):
+#         self.__skill = skill
+#
+#     @skill.deleter
+#     def skill(self, skill):
+#         del self.__skill
+#
+#
+# p1 = Person("Viktor", 12)
+# print(p1.name, p1.skill)
+# p1.name = "Ann"
+# p1.skill = 16
+# print(p1.name, p1.skill)
+# # del p1.name
+# print(p1.name)
+
+# class Point:
+#     __count = 0
+#
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+#         Point.__count += 1
+#
+#     @staticmethod
+#     def get_count():
+#         return Point.__count
+#
+#
+# p1 = Point(5, 10)
+# p2 = Point(4, 8)
+# p3 = Point(2, 7)
+# print(p1.get_count())
+# print(Point.get_count())
 
 
+# class Change:
+#     @staticmethod
+#     def inc(x):
+#         return x + 1
+#
+#     @staticmethod
+#     def dec(x):
+#         return x - 1
+#
+#
+# print(Change.inc(10), Change.dec(10))
+
+# class Args:
+#     @staticmethod
+#     def max(*args):
+#         return max(args)
+#
+#     @staticmethod
+#     def min(*args):
+#         return min(args)
+#
+#     @staticmethod
+#     def art(*args):
+#         return sum(args) // len(args)
+#
+#     @staticmethod
+#     def fac(x):
+#         z = 1
+#         for i in range(1, x + 1):
+#             z *= i
+#         return z
+#
+#
+# print(Args.max(3, 5, 7, 9))
+# print(Args.min(3, 5, 7, 9))
+# print(Args.art(3, 5, 7, 9))
+# print(Args.fac(6))
+
+# class Number:
+#     @staticmethod
+#     def max(*args):
+#         max1 = 0
+#         for i in args:
+#             max1 = max1 if i < max1 else i
+#         return max1
+#
+#
+# print(Number.max(3, 5, 7, 9))
+
+
+# class Date:
+#     def __init__(self, day=0, month=0, year=0):
+#         self.day = day
+#         self.month = month
+#         self.year = year
+#
+#     @classmethod
+#     def from_string(cls, date_as_string):
+#         day, month, year = map(int, date_as_string.split('.'))
+#         date1 = cls(day, month, year)
+#         return date1
+#
+#     def string_to_db(self):
+#         return f"{self.year}-{self.month}-{self.day}"
+
+
+# d = Date()
+# string_date = '23.10.2022'
+# string_date = d.from_string('23.10.2022')
+# day, month, year = map(int, string_date.split('.'))
+# print(day, month, year)
+# data = Date(day, month, year)
+# print(data.string_to_db())
+# print(string_date.string_to_db())
+# string_date1 = Date.from_string('21.12.2021')
+# print(string_date1.string_to_db())
+
+class Counting:
+    __count = 0
+
+    @staticmethod
+    def triangle(a, b, c):
+        p = (a + b + c) * 0.5
+        s = p * (p - a) * (p - b) * (p - c)
+        Counting.__count += 1
+        return print("Площадь треугольника по формуле Герона", (a, b, c), ':', round((s ** (1 / 2)), 3))
+
+    @staticmethod
+    def triangle2(d, h):
+        s1 = d * h * 0.5
+        Counting.__count += 1
+        return print('Площадь треугольника по высоте и основанию', (d, h), ":", s1)
+
+    @staticmethod
+    def rectangle(dl, h):
+        s2 = dl * h
+        Counting.__count += 1
+        return print(" Площадь прямоугольника со сторонами", (dl, h), ':', s2)
+
+    @staticmethod
+    def square(r):
+        Counting.__count += 1
+        return print("Площадь квадрата со стороной ", r, ':', r ** 2)
+
+    @staticmethod
+    def quantity():
+        return print("Количество подсчетов площади:", Counting.__count)
+
+
+Counting.triangle(3, 4, 5)
+Counting.triangle2(7, 6)
+Counting.rectangle(2, 6)
+Counting.square(6)
+Counting.quantity()
