@@ -2416,40 +2416,394 @@
 # string_date1 = Date.from_string('21.12.2021')
 # print(string_date1.string_to_db())
 
-class Counting:
-    __count = 0
+# class Counting:
+#     __count = 0
+#
+#     @staticmethod
+#     def triangle(a, b, c):
+#         p = (a + b + c) * 0.5
+#         s = p * (p - a) * (p - b) * (p - c)
+#         Counting.__count += 1
+#         return print("Площадь треугольника по формуле Герона", (a, b, c), ':', round((s ** (1 / 2)), 3))
+#
+#     @staticmethod
+#     def triangle2(d, h):
+#         s1 = d * h * 0.5
+#         Counting.__count += 1
+#         return print('Площадь треугольника по высоте и основанию', (d, h), ":", s1)
+#
+#     @staticmethod
+#     def rectangle(dl, h):
+#         s2 = dl * h
+#         Counting.__count += 1
+#         return print(" Площадь прямоугольника со сторонами", (dl, h), ':', s2)
+#
+#     @staticmethod
+#     def square(r):
+#         Counting.__count += 1
+#         return print("Площадь квадрата со стороной ", r, ':', r ** 2)
+#
+#     @staticmethod
+#     def quantity():
+#         return print("Количество подсчетов площади:", Counting.__count)
+#
+#
+# Counting.triangle(3, 4, 5)
+# Counting.triangle2(7, 6)
+# Counting.rectangle(2, 6)
+# Counting.square(6)
+# Counting.quantity()
 
-    @staticmethod
-    def triangle(a, b, c):
-        p = (a + b + c) * 0.5
-        s = p * (p - a) * (p - b) * (p - c)
-        Counting.__count += 1
-        return print("Площадь треугольника по формуле Герона", (a, b, c), ':', round((s ** (1 / 2)), 3))
+# class Account:
+#     rate_usd = 0.13
+#     rate_euro = 0.11
+#     suffix = 'RUB'
+#     suffix_usd = 'usd'
+#     suffix_euro = 'euro'
 
-    @staticmethod
-    def triangle2(d, h):
-        s1 = d * h * 0.5
-        Counting.__count += 1
-        return print('Площадь треугольника по высоте и основанию', (d, h), ":", s1)
+# def __init__(self, num, surname, percent, value=0):
+#     self.num = num
+#     self.surname = surname
+#     self.percent = percent
+#     self.value = value
+#     print(f"Счёт #{self.num} принадлежащий {self.surname} был открыт.")
+#     print("-*-" * 16)
+#
+# def __del__(self):
+#     print('*' * 30)
+#     print(f'Счёт # {self.num} принадлежащий {self.surname} был закрыт')
+#
+# @classmethod
+# def set_usd_rate(cls, rate):
+#     cls.rate_usd = rate
+#
+# @classmethod
+# def set_euro_rate(cls, rate):
+#     cls.rate_euro = rate
+#
+# @staticmethod
+# def convert(value, rate):
+#     return value * rate
+#
+# def edit_owner(self, surname):
+#     self.surname = surname
+#
+# def add_persons(self):
+#     self.value += self.value * self.percent
+#     print('Проценты начислены')
+#     self.print_balance()
+#
+# def withdraw_money(self, val):
+#     if val > self.value:
+#         print(f"Нет такой суммы {val} {Account.suffix}")
+#     else:
+#         self.value -= val
+#         print(f"{val} {Account.suffix} Снято")
+#     self.print_balance()
+#
+# def add_money(self, val):
+#     self.value += val
+#     print(f"{val} {Account.suffix} добавлено")
+#     self.print_balance()
 
-    @staticmethod
-    def rectangle(dl, h):
-        s2 = dl * h
-        Counting.__count += 1
-        return print(" Площадь прямоугольника со сторонами", (dl, h), ':', s2)
+# def convert_to_usd(self):  # добавить
+#     usd_val = Account.convert(self.value, Account.rate_usd)
+#     print(f"Состояние счёта: {usd_val} {Account.suffix_usd}")
+#
+# def convert_to_euro(self):
+#     euro_val = Account.convert(self.value, Account.rate_euro)
+#     print(f'Состояние счёта: {euro_val} {Account.suffix_euro}')
+#
+# def print_balance(self):
+#     print(f"Текущий баланс {self.value} {Account.suffix}")
+#
+# def print_info(self):
+#     print('Информация о счёте')
+#     print('-' * 29)
+#     print(f"#{self.num}")
+#     print(f'Владелец: {self.surname}')
+#     self.print_balance()
+#     print(f"Проценты: {self.percent:.0%}")
+#     print('-' * 20)
 
-    @staticmethod
-    def square(r):
-        Counting.__count += 1
-        return print("Площадь квадрата со стороной ", r, ':', r ** 2)
 
-    @staticmethod
-    def quantity():
-        return print("Количество подсчетов площади:", Counting.__count)
+# acc = Account('12345', 'Долгих', 0.03, 1000)
+# acc.print_balance()
+# acc.print_info()
+# acc.convert_to_usd()
+# acc.convert_to_euro()
+# Account.set_usd_rate(2)
+# acc.convert_to_usd()
+# Account.set_euro_rate(3)
+# acc.convert_to_euro()
+# print()
+# acc.edit_owner("Дюма")
+# acc.print_info()
+# print()
+# acc.add_persons()
+# acc.convert_to_euro()
+# print()
+# acc.withdraw_money(100)
+# acc.add_money(5000)
+# acc.withdraw_money(3000)
 
 
-Counting.triangle(3, 4, 5)
-Counting.triangle2(7, 6)
-Counting.rectangle(2, 6)
-Counting.square(6)
-Counting.quantity()
+# import re
+#
+#
+# class UserData:
+#     def __init__(self, fio, old, ps, weight):
+#         self.verify_fio(fio)
+#         self.verify_old(old)
+#         self.verify_weight(weight)
+#
+#         self.__fio = fio
+#         self.__old = old
+#         self.__password = ps
+#         self.weight = weight
+#
+#
+#     @staticmethod
+#     def verify_fio(fio):
+#         if not isinstance(fio, str):
+#             raise TypeError('ФИО должно быть строкой')
+#         f = fio.split()
+#         if len(f) != 3:
+#             raise TypeError('Неверный формат ФИО')
+#         letters = "".join(re.findall('[a-zа-яё-]', fio, flags=re.IGNORECASE))
+#         for s in f:
+#             if len(s.strip(letters)) != 0:
+#                 raise TypeError(" В ФИО можно только буквы и дефис")
+#
+#     @staticmethod
+#     def verify_old(old):
+#         if not isinstance(old, int) or old < 14 or old > 120:
+#             raise TypeError('Возраст должен быть числом в диапазоне от 14 до 120 лет')
+#
+#     @staticmethod
+#     def verify_weight(w):
+#         if not isinstance(w, float) or w < 20:
+#             raise TypeError('Вес должен быть числом от 20кг и выше')
+#
+#
+#
+# p1 = UserData("Волков Игорь Николаевич", 26, "1234 567890", 80.8)
+
+
+# class Client:
+#     course_usd = 0.11
+#     course_euro = 0.13
+#     currency = 'RUB'
+#     currency_usd = 'USD'
+#     currency_euro = 'EUR'
+#
+#     def __init__(self, score=0, surname=0, percent=0, value=0):
+#         self.__score = score
+#         self.__surname = surname
+#         self.__percent = percent
+#         self.__value = value
+#         print(f"Счёт #{self.__score} принадлежащий {self.__surname} был открыт.")
+#         print("-*-" * 16)
+#
+#     def __del__(self):
+#         print('*' * 30)
+#         print(f"Счёт# {self.__score} принадлежащий {self.__surname} был закрыт")
+#
+#     def set_score(self, score):
+#         self.__score = score
+#
+#     def get_score(self):
+#         return self.__score
+#
+#     def set_surname(self, surname):
+#         self.__surname = surname
+#
+#     def get_surname(self):
+#         return self.__surname
+
+#        def set_percent(self, percent):
+#            self.__percent = percent
+
+
+#       def get_percent(self):
+#            return self.__percent
+
+
+#
+#     def set_value(self, value):
+#         self.__value = value
+#
+#     def get_value(self):
+#         return self.__value
+#
+#     def print_info(self):
+#         print('Информация о счёте:')
+#         print('=' * 19)
+#         print(
+#             f'#{acc.get_score()}\nВладелец:{acc.get_surname()}\nТекущий баланс:{acc.get_value()}'
+#             f'\nПроценты:{acc.get_percent(): .0%}')
+#         print('-' * 19)
+#
+#     def convert_usd(self):
+#         usd_val = self.__value * Client.course_usd
+#         print(f'Состояние счёта:{usd_val}{Client.currency_usd}')
+#
+#     def convert_euro(self):
+#         euro_val = self.__value * Client.course_euro
+#         print(f'Состояние счёта:{euro_val}{Client.currency_euro}')
+#
+#     def print_balance(self):
+#         print(f"Текущий баланс: {self.__value} {Client.currency}")
+#
+#     def add_percent(self):
+#         self.__value += self.__value * self.__percent
+#         print("\n", 'Проценты успешно начислены')
+#         self.print_balance()
+#
+#     def take_of(self, money):
+#         if money > self.__value:
+#             print(f"\nНа счету нет такой суммы: {money} {Client.currency}")
+#             self.print_balance()
+#         else:
+#             self.__value -= money
+#             print(f"\n{money} {Client.currency} успешно сняты")
+#             self.print_balance()
+#
+#     def put_on(self, money):
+#         self.__value += money
+#         print(f"\n{money} {Client.currency} зачислены")
+#         self.print_balance()
+#
+#
+# acc = Client('12345', 'Долгих', 0.03, 1000)
+#
+# acc.set_score('12345')
+# acc.set_surname('Долгих')
+# acc.set_percent(0.03)
+# acc.set_value(1000)
+#
+# acc.print_info()
+# print()
+# acc.convert_usd()
+# acc.convert_euro()
+# print()
+# acc.set_surname('Дюма')
+# acc.print_info()
+# acc.add_percent()
+# acc.take_of(100)
+# acc.take_of(3000)
+# acc.put_on(5000)
+# acc.take_of(3000)
+
+
+class Client:
+    course_usd = 0.11
+    course_euro = 0.13
+    currency = 'RUB'
+    currency_usd = 'USD'
+    currency_euro = 'EUR'
+
+    def __init__(self, score=0, surname=0, percent=0, value=0):
+        self.__score = score
+        self.__surname = surname
+        self.__percent = percent
+        self.__value = value
+        # print(f"Счёт #{self.__score} принадлежащий {self.__surname} был открыт.")
+        # print("-*-" * 16)
+
+    @property
+    def score(self):
+        return self.__score
+
+    @score.setter
+    def score(self, score):
+        self.__score = score
+
+    @property
+    def surname(self):
+        return self.__surname
+
+    @surname.setter
+    def surname(self, surname):
+        self.__surname = surname
+
+    @property
+    def percent(self):
+        return self.__percent
+
+    @percent.setter
+    def percent(self, percent):
+        self.__percent = percent
+
+    @property
+    def value(self):
+        return self.value
+
+    @value.setter
+    def value(self, value):
+        self.__value = value
+
+    def print_info(self):
+        print('Информация о счёте:')
+        print('=' * 19)
+        print(
+            f'#{acc.__score}\nВладелец:{acc.__surname}\nТекущий баланс:{acc.__value}'
+            f'\nПроценты:{acc.__percent: .0%}')
+        print('-' * 19)
+
+    def client_info(self):
+        print(f"Счёт #{acc.__score} принадлежащий {acc.__surname} был открыт.")
+        print("-*-" * 16)
+
+    def convert_usd(self):
+        usd_val = self.__value * Client.course_usd
+        print(f'Состояние счёта:{usd_val}{Client.currency_usd}')
+
+    def convert_euro(self):
+        euro_val = self.__value * Client.course_euro
+        print(f'Состояние счёта:{euro_val}{Client.currency_euro}')
+
+    def print_balance(self):
+        print(f"Текущий баланс: {self.__value} {Client.currency}")
+
+    def add_percent(self):
+        self.__value += self.__value * self.__percent
+        print("\n", 'Проценты успешно начислены')
+        self.print_balance()
+
+    def take_of(self, money):
+        if money > self.__value:
+            print(f"\nНа счету нет такой суммы: {money} {Client.currency}")
+            self.print_balance()
+        else:
+            self.__value -= money
+            print(f"\n{money} {Client.currency} успешно сняты")
+            self.print_balance()
+
+    def put_on(self, money):
+        self.__value += money
+        print(f"\n{money} {Client.currency} зачислены")
+        self.print_balance()
+
+
+
+
+acc = Client()
+acc.client_info()
+acc.score = '12345'
+acc.surname = 'Долгих'
+acc.percent = 0.03
+acc.value = 1000
+acc.print_info()
+
+print()
+acc.convert_usd()
+acc.convert_euro()
+print()
+acc.surname = 'Дюма'
+acc.print_info()
+acc.add_percent()
+acc.take_of(100)
+acc.take_of(3000)
+acc.put_on(5000)
+acc.take_of(3000)
