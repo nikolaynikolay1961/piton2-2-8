@@ -2547,21 +2547,21 @@
 # acc.add_money(5000)
 # acc.withdraw_money(3000)
 
-
+#
 # import re
-#
-#
+# #
+# #
 # class UserData:
 #     def __init__(self, fio, old, ps, weight):
-#         self.verify_fio(fio)
-#         self.verify_old(old)
-#         self.verify_weight(weight)
+#         # self.verify_fio(fio)
+#         # self.verify_old(old)
+#         # self.verify_weight(weight)
+#         # self.verity_ps(ps)
 #
-#         self.__fio = fio
-#         self.__old = old
-#         self.__password = ps
+#         self.fio = fio
+#         self.old = old
+#         self.password = ps
 #         self.weight = weight
-#
 #
 #     @staticmethod
 #     def verify_fio(fio):
@@ -2585,10 +2585,58 @@
 #         if not isinstance(w, float) or w < 20:
 #             raise TypeError('Вес должен быть числом от 20кг и выше')
 #
+#     @staticmethod
+#     def verity_ps(ps):
+#         if not isinstance(ps, str):
+#             raise TypeError("Паспорт должен быть строкой")
+#         s = ps.split()  # ['1234', '567890']
+#         if len(s) != 2 or len(s[0]) != 4 or len(s[1]) != 6:
+#             raise TypeError("Неверный формат паспорта")
+#         for p in s:
+#             if not p.isdigit():
+#                 raise TypeError("Серия и номер числа")
+#
+#     @property
+#     def fio(self):
+#         return self.__fio
+#
+#     @fio.setter
+#     def fio(self, fio):
+#         self.verify_fio(fio)
+#         self.__fio = fio
+#
+#     @property
+#     def old(self):
+#         return self.__old
+#
+#     @old.setter  # добавить 2 метода
+#     def old(self, old):
+#         self.verify_old(old)
+#         self.__old = old
+#
+#     @property
+#     def weight(self):
+#         return self.__weight
+#
+#     @weight.setter
+#     def weight(self, weight):
+#         self.verify_weight(weight)
+#         self.__weight = weight
+#
+#     @property
+#     def password(self):
+#         return self.__password
+#
+#     @password.setter
+#     def password(self, ps):
+#         self.verity_ps(ps)
+#         self.__password = ps
 #
 #
 # p1 = UserData("Волков Игорь Николаевич", 26, "1234 567890", 80.8)
-
+# p1.fio = "Сидоров Игорь Николаевич"
+# print(p1.fio)
+# print(p1.__dict__)
 
 # class Client:
 #     course_usd = 0.11
@@ -2696,114 +2744,456 @@
 # acc.take_of(3000)
 
 
-class Client:
-    course_usd = 0.11
-    course_euro = 0.13
-    currency = 'RUB'
-    currency_usd = 'USD'
-    currency_euro = 'EUR'
+# class Client:
+#     course_usd = 0.11
+#     course_euro = 0.13
+#     currency = 'RUB'
+#     currency_usd = 'USD'
+#     currency_euro = 'EUR'
+#
+#     def __init__(self, score=0, surname=0, percent=0, value=0):
+#         self.__score = score
+#         self.__surname = surname
+#         self.__percent = percent
+#         self.__value = value
+#         # print(f"Счёт #{self.__score} принадлежащий {self.__surname} был открыт.")
+#         # print("-*-" * 16)
+#
+#     @property
+#     def score(self):
+#         return self.__score
+#
+#     @score.setter
+#     def score(self, score):
+#         self.__score = score
+#
+#     @property
+#     def surname(self):
+#         return self.__surname
+#
+#     @surname.setter
+#     def surname(self, surname):
+#         self.__surname = surname
+#
+#     @property
+#     def percent(self):
+#         return self.__percent
+#
+#     @percent.setter
+#     def percent(self, percent):
+#         self.__percent = percent
+#
+#     @property
+#     def value(self):
+#         return self.value
+#
+#     @value.setter
+#     def value(self, value):
+#         self.__value = value
+#
+#     def print_info(self):
+#         print('Информация о счёте:')
+#         print('=' * 19)
+#         print(
+#             f'#{acc.__score}\nВладелец:{acc.__surname}\nТекущий баланс:{acc.__value}'
+#             f'\nПроценты:{acc.__percent: .0%}')
+#         print('-' * 19)
+#
+#     def client_info(self):
+#         print(f"Счёт #{acc.__score} принадлежащий {acc.__surname} был открыт.")
+#         print("-*-" * 16)
+#
+#     def convert_usd(self):
+#         usd_val = self.__value * Client.course_usd
+#         print(f'Состояние счёта:{usd_val}{Client.currency_usd}')
+#
+#     def convert_euro(self):
+#         euro_val = self.__value * Client.course_euro
+#         print(f'Состояние счёта:{euro_val}{Client.currency_euro}')
+#
+#     def print_balance(self):
+#         print(f"Текущий баланс: {self.__value} {Client.currency}")
+#
+#     def add_percent(self):
+#         self.__value += self.__value * self.__percent
+#         print("\n", 'Проценты успешно начислены')
+#         self.print_balance()
+#
+#     def take_of(self, money):
+#         if money > self.__value:
+#             print(f"\nНа счету нет такой суммы: {money} {Client.currency}")
+#             self.print_balance()
+#         else:
+#             self.__value -= money
+#             print(f"\n{money} {Client.currency} успешно сняты")
+#             self.print_balance()
+#
+#     def put_on(self, money):
+#         self.__value += money
+#         print(f"\n{money} {Client.currency} зачислены")
+#         self.print_balance()
+#
+#
+# acc = Client()
+# acc.client_info()
+# acc.score = '12345'
+# acc.surname = 'Долгих'
+# acc.percent = 0.03
+# acc.value = 1000
+# acc.print_info()
+#
+# print()
+# acc.convert_usd()
+# acc.convert_euro()
+# print()
+# acc.surname = 'Дюма'
+# acc.print_info()
+# acc.add_percent()
+# acc.take_of(100)
+# acc.take_of(3000)
+# acc.put_on(5000)
+# acc.take_of(3000)
 
-    def __init__(self, score=0, surname=0, percent=0, value=0):
-        self.__score = score
-        self.__surname = surname
-        self.__percent = percent
-        self.__value = value
-        # print(f"Счёт #{self.__score} принадлежащий {self.__surname} был открыт.")
-        # print("-*-" * 16)
+#
+# class Point(object):
+#     def __init__(self, x=0, y=0):
+#         self.__x = x
+#         self.__y = y
+#
+#     def __str__(self):
+#         return f"({self.__x}, {self.__y})"
+#
+#
+# class Prop:
+#     def __init__(self, sp: Point, ep: Point, color: str = 'red', width: int = 1) -> None:
+#         print("Инициализатор базового класса")
+#         self._sp = sp
+#         self._ep = ep
+#         self._color = color
+#         self.__width = width
+#
+#     def get_width(self):
+#         return self.__width
+#
+#
+# class Line(Prop):
+#     def __init__(self, *args):
+#         print("Переопределённый инициализатор Line")
+#         # Prop.__init__(self, *args)
+#         super().__init__(*args)
+#
+#     def draw_line(self):
+#         print(f"рисование линии: {self._ep}, {self._sp}, {self._color}, {self.get_width()}")
+#
+#
+# class Rect(Prop):
+#     def __init__(self, sp, ep, color, width, bg='yellow'):
+#         super().__init__(sp, ep, color, width)
+#         self._background = bg
+#
+#     def draw_rect(self) -> str:
+#         print(f"рисование Прямоугольника: {self._ep}, {self._sp}, {self._color},"
+#               f" {self.get_width()} {self._background}")
+#
+#
+# line = Line(Point(1, 2), Point(10, 20))
+# line.draw_line()
+# Line.draw_line(line)
+# # print(line._color)
+# # print(isinstance(Point, object))
+# rect = Rect(Point(30, 40), Point(70, 80), 'red', 10)
+# rect.draw_rect()
+
+
+# class Figure:
+#     def __init__(self, color):
+#         self.__color = color
+#
+#     def __str__(self):
+#         return f"{self.__color}"
+#
+#     @property
+#     def color(self):
+#         return self.__color
+#
+#     @color.setter
+#     def color(self, c):
+#         self.__color = c
+#
+#
+# class Rectangle(Figure):
+#     def __init__(self, width, height, color):
+#         super().__init__(color)
+#         self.width = width
+#         self.__height = height
+#
+#     def __str__(self):
+#         return f"{self.__width}, {self.__height}, {self.color}"
+#
+#     @property
+#     def width(self):
+#         return self.__width
+#
+#     @width.setter
+#     def width(self, w):
+#         if w > 0:
+#             self.__width = w
+#         else:
+#             raise TypeError("Ширина")
+#
+#     @property
+#     def height(self):
+#         return self.__height
+#
+#     def area(self):
+#         return self.__width * self.__height
+#
+#
+#
+#
+# rect = Rectangle(10, 20, 'green')
+# print(rect)
+# print(rect.width)
+# print(rect.height)
+# print(rect.color)
+# rect.color = "red"
+# rect.width = 5
+# print(rect)
+# print(rect.area())
+
+# class Rect:
+#     def __init__(self, width, height):
+#         self.width = width
+#         self.height = height
+#
+#     def show_rect(self):
+#         print(f"Прямоугольник:\nШирина: {self.width}\nВысота: {self.height}")
+#
+#
+# class RectFon(Rect):
+#     def __init__(self, width, height, background):
+#         self.fon = background
+#         super().__init__(width, height)
+#
+#     def show_rect(self):
+#         super().show_rect()
+#         print("Фон", self.fon)
+
+
+# class RectBorder(Rect):
+#     def __init__(self, width, height, border):
+#         self.border = border
+#         super().__init__(width, height)
+#
+#     def show_rect(self):
+#         super().show_rect()
+#         print("Рамка:", self.border)
+
+
+# shape = Rect(100, 200)
+# shape.show_rect()
+# shape2 = RectBorder(600, 500, '1px solid red')
+# shape2.show_rect()
+
+# class Vector(list):
+#     def __str__(self):
+#         return " ".join(map(str, self))
+#
+#
+# v = Vector([1, 2, 3])
+# print(v)
+# print(type(v))
+
+# Перегрузка методов
+#
+# class Point:
+#     def __init__(self, x=0, y=0):
+#         self.__x = x
+#         self.__y = y
+#
+#     def __str__(self):
+#         return f"({self.__x}, {self.__y})"
+#
+#     def is_int(self):
+#         if not isinstance(self.__x, int) or not isinstance(self.__y, int):
+#             print("Координаты")
+#             return False
+#         return True
+#
+#     def set_coords(self, sp, ep):
+#         if sp.is_int() and ep.is_int():
+#             self._sp = sp
+#             self._ep = ep
+#
+#
+# class Prop:
+#     def __init__(self, sp: Point, ep: Point, color: str = "red", width: int = 1):
+#         self._sp = sp
+#         self._ep = ep
+#         self._color = color
+#         self._width = width
+#
+#
+# class Line(Prop):
+#
+#     def draw_line(self):
+#         print(f"Рисование линии: {self._sp}, {self._ep}, {self._color}, {self._width}")
+#
+#
+# line = Line(Point(1, 2), Point(10, 20))
+# line.draw_line()
+
+# Абстрактные методы
+#
+# class Point:
+#     def __init__(self, x=0, y=0):
+#         self.__x = x
+#         self.__y = y
+#
+#     def __str__(self):
+#         return f"({self.__x}, {self.__y})"
+#
+#     def is_int(self):
+#         if not isinstance(self.__x, int) or not isinstance(self.__y, int):
+#             print("Координаты должны быть целочисленными")
+#             return False
+#         return True
+#
+#
+# class Prop:
+#     def __init__(self, sp: Point, ep: Point, color: str = "red", width: int = 1):
+#         self._sp = sp
+#         self._ep = ep
+#         self._color = color
+#         self._width = width
+#
+#     def draw_line(self):
+#         raise NotImplementedError("В дочернем классе")
+#
+#
+# class Line(Prop):
+#     # def draw_line(self):
+#     #     print(f"Рисование линии: {self._sp}, {self._ep}, {self._color}, {self._width}")
+#     pass
+#
+#
+# line = Line(Point(1, 2), Point(10, 20))
+# line.draw_line()
+
+import re
+
+
+class AutoMobile:
+    def __init__(self, model=0, year=0, manufacturer=0, power=0, color=0, price=0):
+        self.model = model
+        self.year = year
+        self.manufacturer = manufacturer
+        self.power = power
+        self.color = color
+        self.price = price
 
     @property
-    def score(self):
-        return self.__score
+    def model(self):
+        return self.__model
 
-    @score.setter
-    def score(self, score):
-        self.__score = score
-
-    @property
-    def surname(self):
-        return self.__surname
-
-    @surname.setter
-    def surname(self, surname):
-        self.__surname = surname
+    @model.setter
+    def model(self, model):
+        self.__model = model
 
     @property
-    def percent(self):
-        return self.__percent
+    def year(self):
+        return self.__year
 
-    @percent.setter
-    def percent(self, percent):
-        self.__percent = percent
+    @year.setter
+    def year(self, year):
+        self.verify_year(year)
+        self.__year = year
 
     @property
-    def value(self):
-        return self.value
+    def manufacturer(self):
+        return self.__manufacturer
 
-    @value.setter
-    def value(self, value):
-        self.__value = value
+    @manufacturer.setter
+    def manufacturer(self, manufacturer):
+        self.verify_manufacturer(manufacturer)
+        self.__manufacturer = manufacturer
 
-    def print_info(self):
-        print('Информация о счёте:')
-        print('=' * 19)
-        print(
-            f'#{acc.__score}\nВладелец:{acc.__surname}\nТекущий баланс:{acc.__value}'
-            f'\nПроценты:{acc.__percent: .0%}')
-        print('-' * 19)
+    @property
+    def power(self):
+        return self.__power
 
-    def client_info(self):
-        print(f"Счёт #{acc.__score} принадлежащий {acc.__surname} был открыт.")
-        print("-*-" * 16)
+    @power.setter
+    def power(self, power):
+        self.verify_power(power)
+        self.__power = power
 
-    def convert_usd(self):
-        usd_val = self.__value * Client.course_usd
-        print(f'Состояние счёта:{usd_val}{Client.currency_usd}')
+    @property
+    def color(self):
+        return self.__color
 
-    def convert_euro(self):
-        euro_val = self.__value * Client.course_euro
-        print(f'Состояние счёта:{euro_val}{Client.currency_euro}')
+    @color.setter
+    def color(self, color):
+        self.verify_color(color)
+        self.__color = color
 
-    def print_balance(self):
-        print(f"Текущий баланс: {self.__value} {Client.currency}")
+    @property
+    def price(self):
+        return self.__price
 
-    def add_percent(self):
-        self.__value += self.__value * self.__percent
-        print("\n", 'Проценты успешно начислены')
-        self.print_balance()
+    @price.setter
+    def price(self, price):
+        self.verify_price(price)
+        self.__price = price
 
-    def take_of(self, money):
-        if money > self.__value:
-            print(f"\nНа счету нет такой суммы: {money} {Client.currency}")
-            self.print_balance()
-        else:
-            self.__value -= money
-            print(f"\n{money} {Client.currency} успешно сняты")
-            self.print_balance()
+    @staticmethod
+    def verify_manufacturer(manuf):
+        if not isinstance(manuf, str):
+            raise TypeError("Название марки автомобиля должно быть строкой")
 
-    def put_on(self, money):
-        self.__value += money
-        print(f"\n{money} {Client.currency} зачислены")
-        self.print_balance()
+    @staticmethod
+    def verify_power(pow):
+        if not isinstance(pow, int) or pow < 300 or pow > 600:
+            raise TypeError("Мощность должна быть в числах от 300 до 600 л.с.")
+
+    @staticmethod
+    def verify_year(year):
+        if not isinstance(year, int) or year < 2019:
+            raise TypeError("Год выпуска должен быть в числах и не раньше 2019 года")
+
+    @staticmethod
+    def verify_color(color):
+        if not isinstance(color, str):
+            raise TypeError("Цвет должен быть строкой")
+
+    @staticmethod
+    def verify_price(price):
+        if not isinstance(price, int) or price > 15000000:
+            raise TypeError("Цена в числах и не более 15 млн. руб.")
 
 
 
 
-acc = Client()
-acc.client_info()
-acc.score = '12345'
-acc.surname = 'Долгих'
-acc.percent = 0.03
-acc.value = 1000
-acc.print_info()
+    def auto_info(self):
+        print('Данные автомобиля'.center(40, '-'))
+        print(f'Название модели: {auto.model}\nГод выпуска: {auto.year}'
+              f'\nПроизводитель: {auto.manufacturer}'
+              f'\nМощность: {auto.power} л.с.\nЦвет: {auto.color}'
+              f'\nЦена: {self.auto_list()}  ')
 
-print()
-acc.convert_usd()
-acc.convert_euro()
-print()
-acc.surname = 'Дюма'
-acc.print_info()
-acc.add_percent()
-acc.take_of(100)
-acc.take_of(3000)
-acc.put_on(5000)
-acc.take_of(3000)
+    def auto_list(self):
+        s = str(auto.price)
+        a = s[-3:]
+        b = s[:-6]
+        c = s[-6:-3]
+
+        return str(b + ' млн ' + c + ' тыс ' + a + " руб")
+
+
+auto = AutoMobile()
+auto.model = 'X7'
+auto.year = 2021
+auto.manufacturer = 'BMW'
+auto.power = 530
+auto.color = 'white'
+auto.price = 10790000
+auto.auto_info()
