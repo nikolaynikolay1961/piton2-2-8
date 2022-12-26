@@ -2567,7 +2567,7 @@
 #     def verify_fio(fio):
 #         if not isinstance(fio, str):
 #             raise TypeError('ФИО должно быть строкой')
-#         f = fio.split()
+#         f = fio.split()  # ("Волков", "Игорь", "Николаевич")
 #         if len(f) != 3:
 #             raise TypeError('Неверный формат ФИО')
 #         letters = "".join(re.findall('[a-zа-яё-]', fio, flags=re.IGNORECASE))
@@ -2594,7 +2594,7 @@
 #             raise TypeError("Неверный формат паспорта")
 #         for p in s:
 #             if not p.isdigit():
-#                 raise TypeError("Серия и номер числа")
+#                 raise TypeError("Серия и номер числа должны быть числами")
 #
 #     @property
 #     def fio(self):
@@ -2872,7 +2872,7 @@
 #         self._color = color
 #         self.__width = width
 #
-#     def get_width(self):
+#     def get_width(self):  # создали метод, т.к. переменна width закрыта
 #         return self.__width
 #
 #
@@ -2904,6 +2904,7 @@
 # rect = Rect(Point(30, 40), Point(70, 80), 'red', 10)
 # rect.draw_rect()
 
+# DRY (Don't Repeat Yourself) - не повторяйся
 
 # class Figure:
 #     def __init__(self, color):
@@ -2925,10 +2926,10 @@
 #     def __init__(self, width, height, color):
 #         super().__init__(color)
 #         self.width = width
-#         self.__height = height
+#         self.height = height
 #
 #     def __str__(self):
-#         return f"{self.__width}, {self.__height}, {self.color}"
+#         return f"{self.__width}, {self.__height}, {self.color}"  # self.color - это метод из род.класса
 #
 #     @property
 #     def width(self):
@@ -2939,15 +2940,23 @@
 #         if w > 0:
 #             self.__width = w
 #         else:
-#             raise TypeError("Ширина")
+#             raise ValueError("Ширина должна быть положительным числом")
 #
 #     @property
 #     def height(self):
 #         return self.__height
 #
+#     @width.setter
+#     def width(self, h):
+#       if h > 0:
+#           self.__height = h
+#       else:
+#
+#           raise ValueError("Высота должна быть положительным числом")
+#
 #     def area(self):
 #         return self.__width * self.__height
-#
+##        return self.width * self.height   # одно и то же
 #
 #
 #
@@ -2967,7 +2976,7 @@
 #         self.height = height
 #
 #     def show_rect(self):
-#         print(f"Прямоугольник:\nШирина: {self.width}\nВысота: {self.height}")
+#         print(f"=Прямоугольник=:\nШирина: {self.width}\nВысота: {self.height}")
 #
 #
 # class RectFon(Rect):
@@ -2976,8 +2985,17 @@
 #         super().__init__(width, height)
 #
 #     def show_rect(self):
-#         super().show_rect()
+#         super().show_rect()  # добавляем метод из родительского класса
 #         print("Фон", self.fon)
+
+# class RectFonBorder(RectFon):
+#     def __init__(self):(self, width, height, background, border):
+#         super().__init__(width, height, background)
+#         self.border = border
+#
+#     def show_rect(self):
+#         super().show_rect()
+#         print('Рамка: ', self.border)
 
 
 # class RectBorder(Rect):
@@ -2992,12 +3010,17 @@
 
 # shape = Rect(100, 200)
 # shape.show_rect()
+# shape1 = RectFon(400, 300, 'yellow')
+# shape1.show_rect()
 # shape2 = RectBorder(600, 500, '1px solid red')
 # shape2.show_rect()
+# shape3 = RectFonBorder(600, 500, 'yellow', '1px solid red')
+# shape3.show_rect()
+
 
 # class Vector(list):
 #     def __str__(self):
-#         return " ".join(map(str, self))
+#         return " ".join(map(str, self))  # ['1' '2' '3'] -> 1 2 3
 #
 #
 # v = Vector([1, 2, 3])
@@ -3016,14 +3039,9 @@
 #
 #     def is_int(self):
 #         if not isinstance(self.__x, int) or not isinstance(self.__y, int):
-#             print("Координаты")
+#             print("Координаты должны быть целочисленными")
 #             return False
 #         return True
-#
-#     def set_coords(self, sp, ep):
-#         if sp.is_int() and ep.is_int():
-#             self._sp = sp
-#             self._ep = ep
 #
 #
 # class Prop:
@@ -3032,15 +3050,31 @@
 #         self._ep = ep
 #         self._color = color
 #         self._width = width
+
+#    # def set_coord(self, sp, ep):
+#    #     if sp.is_int() and ep.is_int():
+#    #         self._sp = sp
+#    #         self._ep = ep
 #
 #
 # class Line(Prop):
+
+#     def set_coord(self, sp, ep=None):
+#         if ep is None:
+#             if sp.is_int():
+#                 self._sp= sp
+#         else:
+#             if sp.is_int() and ep.is_int():
+#             self._sp = sp
+#             self._ep = ep
 #
 #     def draw_line(self):
 #         print(f"Рисование линии: {self._sp}, {self._ep}, {self._color}, {self._width}")
 #
 #
 # line = Line(Point(1, 2), Point(10, 20))
+# line.draw_line()
+# Line.set_coord(Point(20, 40), Point(50, 60)
 # line.draw_line()
 
 # Абстрактные методы
@@ -3066,134 +3100,178 @@
 #         self._ep = ep
 #         self._color = color
 #         self._width = width
+
+#
+
 #
 #     def draw_line(self):
-#         raise NotImplementedError("В дочернем классе")
+#         raise NotImplementedError("В дочернем классе должен быть определён метод draw() ")
 #
 #
 # class Line(Prop):
-#     # def draw_line(self):
-#     #     print(f"Рисование линии: {self._sp}, {self._ep}, {self._color}, {self._width}")
-#     pass
+#      def draw_line(self):
+#          print(f"Рисование линии: {self._sp}, {self._ep}, {self._color}, {self._width}")
+#
 #
 #
 # line = Line(Point(1, 2), Point(10, 20))
 # line.draw_line()
+# line.set_coord(Point(20, 40), Point(50, 60))
+# line.draw_line()
 
-import re
+# import re
+#
+#
+# class AutoMobile:
+#     def __init__(self, model=0, year=0, manufacturer=0, power=0, color=0, price=0):
+#         self.model = model
+#         self.year = year
+#         self.manufacturer = manufacturer
+#         self.power = power
+#         self.color = color
+#         self.price = price
+#
+#     @property
+#     def model(self):
+#         return self.__model
+#
+#     @model.setter
+#     def model(self, model):
+#         self.__model = model
+#
+#     @property
+#     def year(self):
+#         return self.__year
+#
+#     @year.setter
+#     def year(self, year):
+#         self.verify_year(year)
+#         self.__year = year
+#
+#     @property
+#     def manufacturer(self):
+#         return self.__manufacturer
+#
+#     @manufacturer.setter
+#     def manufacturer(self, manufacturer):
+#         self.verify_manufacturer(manufacturer)
+#         self.__manufacturer = manufacturer
+#
+#     @property
+#     def power(self):
+#         return self.__power
+#
+#     @power.setter
+#     def power(self, power):
+#         self.verify_power(power)
+#         self.__power = power
+#
+#     @property
+#     def color(self):
+#         return self.__color
+#
+#     @color.setter
+#     def color(self, color):
+#         self.verify_color(color)
+#         self.__color = color
+#
+#     @property
+#     def price(self):
+#         return self.__price
+#
+#     @price.setter
+#     def price(self, price):
+#         self.verify_price(price)
+#         self.__price = price
+#
+#     @staticmethod
+#     def verify_manufacturer(manuf):
+#         if not isinstance(manuf, str):
+#             raise TypeError("Название марки автомобиля должно быть строкой")
+#
+#     @staticmethod
+#     def verify_power(pow):
+#         if not isinstance(pow, int) or pow < 300 or pow > 600:
+#             raise TypeError("Мощность должна быть в числах от 300 до 600 л.с.")
+#
+#     @staticmethod
+#     def verify_year(year):
+#         if not isinstance(year, int) or year < 2019:
+#             raise TypeError("Год выпуска должен быть в числах и не раньше 2019 года")
+#
+#     @staticmethod
+#     def verify_color(color):
+#         if not isinstance(color, str):
+#             raise TypeError("Цвет должен быть строкой")
+#
+#     @staticmethod
+#     def verify_price(price):
+#         if not isinstance(price, int) or price > 15000000:
+#             raise TypeError("Цена в числах и не более 15 млн. руб.")
+#
+#
+#
+#
+#     def auto_info(self):
+#         print('Данные автомобиля'.center(40, '-'))
+#         print(f'Название модели: {auto.model}\nГод выпуска: {auto.year}'
+#               f'\nПроизводитель: {auto.manufacturer}'
+#               f'\nМощность: {auto.power} л.с.\nЦвет: {auto.color}'
+#               f'\nЦена: {self.auto_list()}  ')
+#
+#     def auto_list(self):
+#         s = str(auto.price)
+#         a = s[-3:]
+#         b = s[:-6]
+#         c = s[-6:-3]
+#
+#         return str(b + ' млн ' + c + ' тыс ' + a + " руб")
+#
+#
+# auto = AutoMobile()
+# auto.model = 'X7'
+# auto.year = 2021
+# auto.manufacturer = 'BMW'
+# auto.power = 530
+# auto.color = 'white'
+# auto.price = 10790000
+# auto.auto_info()
+
+class Table:
+    def __init__(self, width=0, height=0, radius=0):
+        self.width = width
+        self.height = height
+        self.radius = radius
+
+    def square_table(self):
+        raise NotImplementedError("В дочернем классе должен быть метод определения площади")
 
 
-class AutoMobile:
-    def __init__(self, model=0, year=0, manufacturer=0, power=0, color=0, price=0):
-        self.model = model
-        self.year = year
-        self.manufacturer = manufacturer
-        self.power = power
-        self.color = color
-        self.price = price
-
-    @property
-    def model(self):
-        return self.__model
-
-    @model.setter
-    def model(self, model):
-        self.__model = model
-
-    @property
-    def year(self):
-        return self.__year
-
-    @year.setter
-    def year(self, year):
-        self.verify_year(year)
-        self.__year = year
-
-    @property
-    def manufacturer(self):
-        return self.__manufacturer
-
-    @manufacturer.setter
-    def manufacturer(self, manufacturer):
-        self.verify_manufacturer(manufacturer)
-        self.__manufacturer = manufacturer
-
-    @property
-    def power(self):
-        return self.__power
-
-    @power.setter
-    def power(self, power):
-        self.verify_power(power)
-        self.__power = power
-
-    @property
-    def color(self):
-        return self.__color
-
-    @color.setter
-    def color(self, color):
-        self.verify_color(color)
-        self.__color = color
-
-    @property
-    def price(self):
-        return self.__price
-
-    @price.setter
-    def price(self, price):
-        self.verify_price(price)
-        self.__price = price
-
-    @staticmethod
-    def verify_manufacturer(manuf):
-        if not isinstance(manuf, str):
-            raise TypeError("Название марки автомобиля должно быть строкой")
-
-    @staticmethod
-    def verify_power(pow):
-        if not isinstance(pow, int) or pow < 300 or pow > 600:
-            raise TypeError("Мощность должна быть в числах от 300 до 600 л.с.")
-
-    @staticmethod
-    def verify_year(year):
-        if not isinstance(year, int) or year < 2019:
-            raise TypeError("Год выпуска должен быть в числах и не раньше 2019 года")
-
-    @staticmethod
-    def verify_color(color):
-        if not isinstance(color, str):
-            raise TypeError("Цвет должен быть строкой")
-
-    @staticmethod
-    def verify_price(price):
-        if not isinstance(price, int) or price > 15000000:
-            raise TypeError("Цена в числах и не более 15 млн. руб.")
+class RoundTable(Table):
+    def square_table(self, width=None, height=None, radius=None):
+        if width is None and height is None:
+            self.radius = radius
+            srt = 3.14 * self.radius ** 2
+            print(f"Площадь круглого стола: {srt}")
 
 
+class RectTable(Table):
+    def square_table(self, width=None, height=None, radius=None):
+        if radius is None and width != height:
+            self.width = width
+            self.height = height
+            print(f"Площадь прямоугольного стола: {self.width * self.height}")
+        if width == height:
+            self.width = width
+
+            print(f"Площадь квадратного стола: {self.width ** 2 }")
 
 
-    def auto_info(self):
-        print('Данные автомобиля'.center(40, '-'))
-        print(f'Название модели: {auto.model}\nГод выпуска: {auto.year}'
-              f'\nПроизводитель: {auto.manufacturer}'
-              f'\nМощность: {auto.power} л.с.\nЦвет: {auto.color}'
-              f'\nЦена: {self.auto_list()}  ')
+table = RoundTable()
+table.square_table(radius=20)
+table1 = RectTable()
+table1.square_table(10, 20)
+table2 = RectTable()
+table2.square_table(15, 15)
+table1.__dir__()  # не работает?
 
-    def auto_list(self):
-        s = str(auto.price)
-        a = s[-3:]
-        b = s[:-6]
-        c = s[-6:-3]
-
-        return str(b + ' млн ' + c + ' тыс ' + a + " руб")
-
-
-auto = AutoMobile()
-auto.model = 'X7'
-auto.year = 2021
-auto.manufacturer = 'BMW'
-auto.power = 530
-auto.color = 'white'
-auto.price = 10790000
-auto.auto_info()
