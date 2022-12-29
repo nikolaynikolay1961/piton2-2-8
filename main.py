@@ -3222,7 +3222,7 @@
 #     def auto_list(self):
 #         s = str(auto.price)
 #         a = s[-3:]
-#         b = s[:-6]
+#         b = s[:-6]a
 #         c = s[-6:-3]
 #
 #         return str(b + ' млн ' + c + ' тыс ' + a + " руб")
@@ -3237,41 +3237,274 @@
 # auto.price = 10790000
 # auto.auto_info()
 
-class Table:
-    def __init__(self, width=0, height=0, radius=0):
-        self.width = width
-        self.height = height
-        self.radius = radius
+# class Table:
+#     def __init__(self, width=0, height=0, radius=0):
+#         self.width = width
+#         self.height = height
+#         self.radius = radius
+#
+#     def square_table(self):
+#         raise NotImplementedError("В дочернем классе должен быть метод определения площади")
+#
+#
+# class RoundTable(Table):
+#     def square_table(self, width=None, height=None, radius=None):
+#         if width is None and height is None:
+#             self.radius = radius
+#             srt = 3.14 * self.radius ** 2
+#             print(f"Площадь круглого стола: {srt}")
+#
+#
+# class RectTable(Table):
+#     def square_table(self, width=None, height=None, radius=None):
+#         if radius is None and width != height:
+#             self.width = width
+#             self.height = height
+#             print(f"Площадь прямоугольного стола: {self.width * self.height}")
+#         if width == height:
+#             self.width = width
+#
+#             print(f"Площадь квадратного стола: {self.width ** 2 }")
+#
+#
+# table = RoundTable()
+# table.square_table(radius=20)
+# table1 = RectTable()
+# table1.square_table(10, 20)
+# table2 = RectTable()
+# table2.square_table(15, 15)
+# table1.__dir__()  # не работает?
 
-    def square_table(self):
-        raise NotImplementedError("В дочернем классе должен быть метод определения площади")
+
+# Правильное решение ДЗ
+# from math import pi
+#
+#
+# class Table:
+#     def __init__(self, width=None, height=None, radius=None):
+#         if radius is None:
+#             if height is None:
+#                 self._width = self._height = width
+#             else:
+#                 self._width = width
+#                 self._height = height
+#         else:
+#             self._radius = radius
+#
+#     def square_table(self):
+#         raise NotImplementedError('В дочернем классе должен быть метод определения площади')
+#
+#
+# class RectTable(Table):
+#     def square_table(self):
+#         return self._width * self._height
+#
+#
+# class RoundTable(Table):
+#     def square_table(self):
+#         return round(pi * self._radius ** 2, 2)
+#
+#
+# t = RectTable(20, 10)
+# print(t.__dict__)
+# print(t.square_table())
+#
+# t2 = RectTable(20)
+# print(t2.__dict__)
+# print(t2.square_table())
+#
+# t1 = RoundTable(radius=20)
+# print(t1.__dict__)
+# print(t1.square_table())
 
 
-class RoundTable(Table):
-    def square_table(self, width=None, height=None, radius=None):
-        if width is None and height is None:
-            self.radius = radius
-            srt = 3.14 * self.radius ** 2
-            print(f"Площадь круглого стола: {srt}")
+# from abc import ABC, abstractmethod
+#
+#
+# class Chess(ABC):
+#     def draw(self):
+#         print("Нарисовал шахматную фигуру")
+#
+#     @abstractmethod
+#     def move(self):
+#         print('Переместил шахматную фигуру 1')
+#         pass
+#
+#
+# class Queen(Chess):
+#     def move(self):
+#         super().move()
+#         print('Переместил шахматную фигуру')
+#         pass
+#
+#
+# q = Queen()
+# q.draw()
+# q.move()
 
 
-class RectTable(Table):
-    def square_table(self, width=None, height=None, radius=None):
-        if radius is None and width != height:
-            self.width = width
-            self.height = height
-            print(f"Площадь прямоугольного стола: {self.width * self.height}")
-        if width == height:
-            self.width = width
+# from abc import ABC, abstractmethod
+#
+#
+# class Currency(ABC):
+#     def __init__(self, value):
+#         self.value = value
+#
+#     @abstractmethod
+#     def convert_to_rub(self):
+#         pass
+#
+#     def print_value(self):
+#         print(self.value, end=" ")  # это будет значение self.value, к примеру 10
+#
+#
+# class Dollar(Currency):
+#     rate_to_rub = 74.16
+#     suffix = "USD"
+#
+#     def convert_to_rub(self):
+#         rub = self.value * Dollar.rate_to_rub  # умножаем значение на курс: 741.60
+#         return rub
+#
+#     def print_value(self):
+#         super().print_value()
+#         print(Dollar.suffix, end=" ")  # будет из 2-х строк одна: 10 USD
+#
+#
+# class Euro(Currency):
+#     rate_to_rub = 90.14
+#     suffix = "EURO"
+#
+#     def convert_to_rub(self):
+#         rub = self.value * Euro.rate_to_rub
+#         return rub
+#
+#     def print_value(self):
+#         super().print_value()
+#         print(Euro.suffix, end=" ")
+#
+#
+# d = [Dollar(5), Dollar(10), Dollar(50), Dollar(100)]  # список экземпляров класса
+# print('=' * 20)
+# for elem in d:
+#     elem.print_value()  # 10 USD
+#     print(f"= {elem.convert_to_rub():.2f} RUB")  # = 741.60 RUB
+#
+# d1 = [Euro(5), Euro(10), Euro(50), Euro(100)]
+# print('=' * 20)
+# for elem in d1:
+#     elem.print_value()
+#     print(f"= {elem.convert_to_rub():.2f} RUB")
 
-            print(f"Площадь квадратного стола: {self.width ** 2 }")
+# доделать +
+# интерфейсы
+# from abc import ABC, abstractmethod
+#
+#
+# class Father(ABC):
+#     @abstractmethod
+#     def display(self):
+#         pass
+#
+#     @abstractmethod
+#     def display2(self):
+#         pass
+#
+#
+# class Child(Father):
+#     def display(self):
+#         print("Дочерний класс")
+#
+#
+# class GrandChild(Child):
+#     def display2(self):
+#         print("Внучатый класс")
+#
+#
+# gc = GrandChild()
+# gc.display2()
+# gc.display()
 
 
-table = RoundTable()
-table.square_table(radius=20)
-table1 = RectTable()
-table1.square_table(10, 20)
-table2 = RectTable()
-table2.square_table(15, 15)
-table1.__dir__()  # не работает?
+# Вложенные класы
 
+# class MyOuter:
+#     age = 18
+#
+#     def __init__(self, name):
+#         self.name = name
+#
+#     @staticmethod
+#     def outer_class_method():
+#         print("Я - метод внешнего класса")
+#
+#     def outer_obj_method(self):
+#         print("Я связующий метод")
+#
+#     class MyInner:
+#         def __init__(self, inner_name, obj):  # из внутреннего во внешний
+#             self.inner_name = inner_name
+#             self.obj = obj
+#
+#         def inner_method(self):
+#             print("Я метод вложенного класса", MyOuter.age, self.obj.name)
+#             # MyOuter.outer_class_method()
+#             # self.obj.outer_obj_method()
+#             # self.inner_name.outer_obj_method()  # так не работает
+#
+#
+# out = MyOuter('Внешний')
+# # inner = out.MyInner("Внутренний", out)
+# inner = out.MyInner('a', out)
+# # print(inner.inner_name)
+# inner.inner_method()
+#
+# class Color:
+#     def __init__(self):
+#         self.name = "Green"
+#         self.lg = self.LightGreen()  # из внешнего во внутренний
+#
+#     def show(self):
+#         print('Name:', self.name)
+#
+#     class LightGreen:
+#         def __init__(self):
+#             self.name = 'Light green'
+#             self.code = '024avc'
+#
+#         def display(self):
+#             print('Name:', self.name)
+#             print('Code:', self.code)
+#
+#
+# outer = Color()
+# outer.show()
+#
+# g = outer.lg
+# g.display()
+# print(g.name)
+# g.name = 'Red'  # = outer.lg.name
+# print(g.name)
+#
+class Student:
+    def __init__(self, name):
+        self.name = name
+        self.nb = self.Notebook()
+
+    def show(self):
+        print(self.name, '=>', self.nb.printer())
+
+    class Notebook:
+        def __init__(self):
+            self.firm = 'HP'
+            self.model = 'I7'
+            self.option = '16'
+
+        def printer(self):
+            return f"{self.firm}. {self.model}. {self.option}"
+
+
+p = Student("Roman")
+p1 = Student("Vladimir")
+p.show()
+p1.show()
