@@ -4446,15 +4446,51 @@
 #     def __init__(self, fn):
 #         self.func = fn
 #
-#     def __call__(self, a, b):
+#     def __call__(self, *args, **kwargs):
 #         print('перед вызовом функции')
+#         res = self.func(*args, **kwargs)
+#         return str(res) + '\nпосле вызова функции'
+
+
+# @MyDecorator
+# def func(a, b):
+#     return a * b
+#
+# @MyDecorator
+# def func1(a, b, c):
+#     return a * b * c
+#
+# @MyDecorator
+# def func2(a, b, c):
+#     return a * b * c
+#
+# print(func1(2, 5, 2))
+# print(func(2, 5))
+# print(func2(3, 4, c=3))
+
+#
+# class MyDecorator:
+#     def __init__(self, arg):
+#         self.name = arg
+#
+#     def __call__(self, fn):
+#         def wrap(a, b):
+#             print('перед вызовом функции')
+#             print(self.name)
+#             fn(a, b)
+#             print('после вызова функции')
+#
+#         return wrap
 #
 #
-# res = self.func(a, b)
-# return str(res) + '\nпосле вызова функции' \
-#        @ MyDecoratordef
-# func(a, b):
-# return a * bprint(func(2, 5)
+# @MyDecorator('test2')
+# def func(a, b):
+#     # return a, b  # так выйдет кортеж
+#     print(a, b)
+
+
+# print(func(2, 5))
+# func(2, 5)
 
 
 # def dec(fn):
@@ -4478,44 +4514,66 @@
 # p1 = Person('Vit', 'Karasev')
 # p1.info()
 
+# import random
+#
+#
+# class Dog:
+#     a = ['m', 'f']
+#     s = random.choice(a)
+#     b = int(random.choice([x for x in range(6)]))
+#
+#     def __init__(self, name, age, sex):
+#         self.name = name
+#         self.age = age
+#         self.sex = sex
+#
+#     def __str__(self):
+#         if self.sex == 'm':
+#             return f'{self.name} is good boy!'
+#         elif self.sex == 'f':
+#             return f'{self.name} is good girl!'
+#
+#     def __repr__(self):
+#         return f"Dog(name='{self.name}', '{self.age}', sex='{self.sex}')"
+#
+#     def __add__(self, other):
+#         if not isinstance(other, Dog):
+#             print('должны быть экземпляры класса')
+#         if self.sex != other.sex:
+#             return [Dog('No name', 'age = 0', random.choice(self.a)) for _ in range(self.b)]
+#         else:
+#             raise TypeError('У однополых не может быть детей')
+#
+#
+# d1 = Dog('Archi', 3, 'm')
+# d2 = Dog('Dezzi', 5, 'f')
+# print(d1)
+# print(d2)
+# b4 = Dog('Djeck', 4, 'm')
+# d3 = d1 + d2
+# print(d3)
+# d4 = d1 + b4
+# print(d4)
 
-import random
+
+# DZ-37
+class Power:
+    def __init__(self, num):
+        self.num = num
+
+    def __call__(self, fn):
+        def wrap(x, y):
+            fn(x, y)
+            print(fn(x, y))
+            print(fn(x, y) ** self.num)
+
+        return wrap
 
 
-class Dog:
-    a = ['m', 'f']
-    s = random.choice(a)
-    b = int(random.choice([x for x in range(6)]))
-
-    def __init__(self, name, age, sex):
-        self.name = name
-        self.age = age
-        self.sex = sex
-
-    def __str__(self):
-        if self.sex == 'm':
-            return f'{self.name} is good boy!'
-        elif self.sex == 'f':
-            return f'{self.name} is good girl!'
-
-    def __repr__(self):
-        return f"Dog(name='{self.name}', '{self.age}', sex='{self.sex}')"
-
-    def __add__(self, other):
-        if not isinstance(other, Dog):
-            print('должны быть экземпляры класса')
-        if self.sex != other.sex:
-            return [Dog('No name', 'age = 0', random.choice(self.a)) for _ in range(self.b)]
-        else:
-            raise TypeError('У однополых не может быть детей')
+@Power(3)
+def multiplicator(x, y):
+    return x * y
 
 
-d1 = Dog('Archi', 3, 'm')
-d2 = Dog('Dezzi', 5, 'f')
-print(d1)
-print(d2)
-b4 = Dog('Djeck', 4, 'm')
-d3 = d1 + d2
-print(d3)
-d4 = d1 + b4
-print(d4)
+multiplicator(2, 2)
+multiplicator(3, 4)
