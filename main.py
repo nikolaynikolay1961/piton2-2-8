@@ -4006,57 +4006,6 @@
 # print(c1.get_format_time())
 
 
-import random
-
-
-class Dog:
-    a = ['m', 'f']
-    s = random.choice(a)
-    b = int(random.choice([x for x in range(6)]))
-
-    def __init__(self, name, age, sex):
-        self.name = name
-        self.age = age
-        self.sex = sex
-        if sex == 'm':
-            print(f'{self.name} is good boy')
-        elif sex == 'f':
-            print(f'{self.name} is good girl')
-        else:
-            print('Определитесь с полом собаки')
-
-    def check(self, name, age, sex):
-        if not isinstance(name, str):
-            print('Имя должно быть строкой')
-
-        if not isinstance(age, float):
-            print('возраст - это число')
-
-        if not isinstance(sex, str):
-            print('Пол собаки определяется строкой')
-
-        if self.sex == sex:
-            print('У них не может быть щенков')
-        else:
-            sob = str((Dog(name='No name', age=0, sex=self.s))) * self.b
-            return sob
-
-    # def __str__(self):
-    #     return
-
-    def __add__(self, other):
-        if not isinstance(other, Dog):
-            print('должны быть экземпляры класса')
-        else:
-            return Dog(name="No name", age=0, sex=self.s)
-
-
-d1 = Dog('Archi', 3, 'm')
-d2 = Dog('Dezzi', 5, 'f')
-d3 = d1 + d2
-
-print(d3.check)
-
 # +++++++++++++++++++++++++++++++++ Полиморфизм +++++++++++++++++++++++++++++++
 
 # class Rectangle:
@@ -4457,3 +4406,116 @@ print(d3.check)
 # for i in kop:
 #     i.print_info()
 #     i.drawing()
+
+
+# class MyDecorator:
+#     def __init__(self, fn):
+#         self.func = fn
+#
+#     def __call__(self, a, b):
+#         print('pered')
+#         res = self.func(a, b)
+#         print('posle')
+#         return res
+#
+#
+# @MyDecorator
+# def func(a, b):
+#     return a * b
+#
+#
+# print(func(2, 5))
+
+# class Power:
+#     def __init__(self, f):
+#         self.func = f
+#
+#     def __call__(self, a, b):
+#         res = self.func(a, b)
+#         return res ** 2
+#
+#
+# @Power
+# def func(a, b):
+#     return a + b
+#
+#
+# print(func(2, 3))
+
+# class MyDecorator:
+#     def __init__(self, fn):
+#         self.func = fn
+#
+#     def __call__(self, a, b):
+#         print('перед вызовом функции')
+#
+#
+# res = self.func(a, b)
+# return str(res) + '\nпосле вызова функции' \
+#        @ MyDecoratordef
+# func(a, b):
+# return a * bprint(func(2, 5)
+
+
+# def dec(fn):
+#     def wrap(*args, **kwargs):
+#         print('*' * 20)
+#         fn(*args, **kwargs)
+#         print('*' * 15)
+#     return wrap
+#
+#
+# class Person:
+#     def __init__(self, name, surname):
+#         self.name = name
+#         self.surname = surname
+#
+#     @dec
+#     def info(self):
+#         print(f'{self.name} {self.surname}')
+#
+#
+# p1 = Person('Vit', 'Karasev')
+# p1.info()
+
+
+import random
+
+
+class Dog:
+    a = ['m', 'f']
+    s = random.choice(a)
+    b = int(random.choice([x for x in range(6)]))
+
+    def __init__(self, name, age, sex):
+        self.name = name
+        self.age = age
+        self.sex = sex
+
+    def __str__(self):
+        if self.sex == 'm':
+            return f'{self.name} is good boy!'
+        elif self.sex == 'f':
+            return f'{self.name} is good girl!'
+
+    def __repr__(self):
+        return f"Dog(name='{self.name}', '{self.age}', sex='{self.sex}')"
+
+    def __add__(self, other):
+        if not isinstance(other, Dog):
+            print('должны быть экземпляры класса')
+        if self.sex != other.sex:
+            return [Dog('No name', 'age = 0', random.choice(self.a)) for _ in range(self.b)]
+        else:
+            raise TypeError('У однополых не может быть детей')
+
+
+d1 = Dog('Archi', 3, 'm')
+d2 = Dog('Dezzi', 5, 'f')
+print(d1)
+print(d2)
+b4 = Dog('Djeck', 4, 'm')
+d3 = d1 + d2
+print(d3)
+d4 = d1 + b4
+print(d4)
