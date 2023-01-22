@@ -1,4 +1,6 @@
 # Вложенные функции
+import random
+
 
 # def outer_fanc(who):
 #     def inner_func():
@@ -4328,6 +4330,15 @@
 #     def print_info(self):
 #         raise NotImplementedError("В дочернем классе должен быть определён метод print_info() ")
 #
+
+# можно сделать импорт АВС: from abc import ABC, absrtactmethod
+# тогда: класс Shape будет class Shape(ABC):
+# и запись будет: @staticmethod
+#                     def perimetr(self):
+#                         pass
+#  и ошибка будет выдаваться сама
+
+
 #
 # class Square(Shape):
 #     def __init__(self, color, side):
@@ -4398,7 +4409,14 @@
 #         for k in range(self.s2):
 #             print(' ' * (self.s1 - 1 - k) + '*' * (1 + k * 2))
 #
-#
+#  вариант метода
+# def drawing(self):
+#     lst = [self.s1, self.s2, self.s3]
+#     n = min(lst)
+#     rows = ([' ' * (n - i - 1) + '*' * (2 * i + 1) for i in range(n)])
+#     return '\n'.join(rows)
+
+
 # sq = Square('red', 3)
 # re = Rectangle('green', 3, 7)
 # tr = Triangle('blue', 11, 6, 6)
@@ -4407,16 +4425,17 @@
 #     i.print_info()
 #     i.drawing()
 
+# ---------------------------Класс как декоратор-------------------------------------------
 
 # class MyDecorator:
 #     def __init__(self, fn):
 #         self.func = fn
 #
 #     def __call__(self, a, b):
-#         print('pered')
+#         print('Перед вызовом функции')
 #         res = self.func(a, b)
-#         print('posle')
-#         return res
+#         # print('После вызова функции')  # в таком виде res будет после print
+#         return str(res) + '\nПосле вызова функции'
 #
 #
 # @MyDecorator
@@ -4425,6 +4444,10 @@
 #
 #
 # print(func(2, 5))
+
+# test = MyDecorator(func)  # то же работает, но MyDecorator нужно закомментировать
+# print(test(2, 5))
+
 
 # class Power:
 #     def __init__(self, f):
@@ -4437,7 +4460,7 @@
 #
 # @Power
 # def func(a, b):
-#     return a + b
+#     return a * b
 #
 #
 # print(func(2, 3))
@@ -4449,26 +4472,30 @@
 #     def __call__(self, *args, **kwargs):
 #         print('перед вызовом функции')
 #         res = self.func(*args, **kwargs)
-#         return str(res) + '\nпосле вызова функции'
-
-
+#         return str(res) + '\nпосле вызова функции\n'
+#
+#
 # @MyDecorator
 # def func(a, b):
 #     return a * b
+#
 #
 # @MyDecorator
 # def func1(a, b, c):
 #     return a * b * c
 #
+#
 # @MyDecorator
 # def func2(a, b, c):
 #     return a * b * c
+#
 #
 # print(func1(2, 5, 2))
 # print(func(2, 5))
 # print(func2(3, 4, c=3))
 
-#
+#                          -------------------------------------------
+
 # class MyDecorator:
 #     def __init__(self, arg):
 #         self.name = arg
@@ -4487,15 +4514,16 @@
 # def func(a, b):
 #     # return a, b  # так выйдет кортеж
 #     print(a, b)
-
-
-# print(func(2, 5))
+#
+#
+# # print(func(2, 5))
 # func(2, 5)
 
+#                                 --------Декорирование методов------------------------------
 
 # def dec(fn):
 #     def wrap(*args, **kwargs):
-#         print('*' * 20)
+#         print('*' * 20, '\n')
 #         fn(*args, **kwargs)
 #         print('*' * 15)
 #     return wrap
@@ -4511,7 +4539,7 @@
 #         print(f'{self.name} {self.surname}')
 #
 #
-# p1 = Person('Vit', 'Karasev')
+# p1 = Person('Виталий', 'Карасёв')
 # p1.info()
 
 # import random
@@ -4555,25 +4583,296 @@
 # d4 = d1 + b4
 # print(d4)
 
+# # можно добавить:
+# lst = (d1, d2, d3)
+# b, c = random.choices(lst, k=2)
+# print(b + c)  # линия 6078 в записи урока
+
 
 # DZ-37
-class Power:
-    def __init__(self, num):
-        self.num = num
+# class Power:
+#     def __init__(self, num):
+#         self.num = num
+#
+#     def __call__(self, fn):
+#         def wrap(x, y):
+#             # fn(x, y)
+#             print(fn(x, y))
+#             print(fn(x, y) ** self.num)
+#
+#         return wrap
+#
+#
+# @Power(3)
+# def multiplicator(x, y):
+#     return x * y
+#
+#
+# multiplicator(2, 2)
+# multiplicator(3, 4)
 
-    def __call__(self, fn):
-        def wrap(x, y):
-            fn(x, y)
-            print(fn(x, y))
-            print(fn(x, y) ** self.num)
+# -----_____----____Дескрипторы____----____----
 
-        return wrap
+# class StringD:
+#     def __init__(self, value=None):
+#         if value:
+#             self.set(value)
+#
+#     def set(self, value):
+#         self.__value = value
+#
+#     def get(self):
+#         return self.__value
 
 
-@Power(3)
-def multiplicator(x, y):
-    return x * y
+# class Person:
+#     def __init__(self, name, surname):
+#         self.name = StringD(name)
+#         self.surname = StringD(surname)
+
+# @property
+# def name(self):
+#     return self.__name
+#
+# @name.setter
+# def name(self, value):
+#     self.__name = value
+#
+# @property
+# def surname(self):
+#     return self.__surname
+#
+# @surname.setter
+# def surname(self, value):
+#     self.__surname = value
 
 
-multiplicator(2, 2)
-multiplicator(3, 4)
+# p = Person('Ivan', 'Petrov')
+# p.name.set('Oleg')
+# print(p.name.get(), p.surname.get())
+
+
+# class ValidateString:  # это дескриптор
+#     def __set_name__(self, owner, name):
+#         self.__name = name
+#
+#     def __get__(self, instance, owner):
+#         return instance.__dict__[self.__name]
+#
+#     def __set__(self, instance, value):
+#         if not isinstance(value, str):
+#             raise ValueError(f'{self.__name} должно быть строкой')
+#         instance.__dict__[self.__name] = value
+#
+#
+# class Person:
+#     name = ValidateString()
+#     surname = ValidateString()
+#
+#     def __init__(self, name, surname):
+#         self.name = name
+#         self.surname = surname
+#
+#
+# p = Person('Ivan', 'Petrov')
+# print(p.name)
+# print(p.surname)
+
+# ---   ===   ---   ===   ---   ===   ---   ===
+
+# class NonNegative:
+#     def __set_name__(self, owner, name):
+#         self.name = name
+#
+#     def __get__(self, instance, owner):
+#         return instance.__dict__[self.name]
+#
+#     def __set__(self, instance, value):
+#         if value < 0:
+#             raise ValueError(f'Значение {self.name} должно быть положительным')
+#         instance.__dict__[self.name] = value
+#
+#
+# class Order:
+#     price = NonNegative()
+#     qty = NonNegative()
+#
+#     def __init__(self, name, price, qty):
+#         self.name = name
+#         self.price = price
+#         self.qty = qty
+#
+#     def total(self):
+#         return self.price * self.qty
+#
+#
+# a = Order('apple', 5, 10)
+# print(a.total())
+# a.price = 20
+# a.qty = 10
+# print(a.total())
+
+# --------------------------------               -----------------------------------------
+# class Integer:
+#     @staticmethod
+#     def verify_coord(coord):
+#         if not isinstance(coord, int):
+#             raise ValueError(f'Значение координаты {coord} должно быть больше нуля')
+#
+#     def __set_name__(self, owner, name):
+#         self.name = '_' + name
+#
+#     def __get__(self, instance, owner):
+#         return instance.__dict__[self.name]
+#
+#     def __set__(self, instance, value):
+#         self.verify_coord(value)
+#         instance.__dict__[self.name] = value
+
+# class Integer:
+#     @staticmethod
+#     def verify_coord(coord):
+#         if not isinstance(coord, int):
+#             raise ValueError(f'Значение координаты {coord} должно быть больше нуля')
+#
+#     def __set_name__(self, owner, name):
+#         self.name = '_' + name
+#
+#     def __get__(self, instance, owner):
+#         # return instance.__dict__[self.name]
+#         return getattr(instance, self.name)
+#
+#     def __set__(self, instance, value):
+#         self.verify_coord(value)
+#         # instance.__dict__[self.name] = value
+#         setattr(instance, self.name, value)
+#
+#     def __delete__(self, instance):
+#         # del instance.__dict__[self.name]
+#         delattr(instance, self.name)
+#
+#
+# class Point3D:
+#     x = Integer()
+#     y = Integer()
+#     z = Integer()
+#
+#     def __init__(self, x, y, z):
+#         self.x = x
+#         self.y = y
+#         self.z = z
+#
+#
+# p = Point3D(1, 2, 3)
+# # del p.
+# print(getattr(p, 'x'))
+# # print(setattr(p, 'x', 6))
+# p.x = 7
+# print(p.__dict__)
+# print(p.y)
+
+# создание модулей ____________=====+++++++++++++++++___________)))))))))
+
+
+# class Rectangle:
+#     def __init__(self, w, h):
+#         self.w = w
+#         self.h = h
+#
+#     def get_perimetr(self):
+#         return 2 * (self.w + self.h)
+#
+#
+# class Square:
+#     def __init__(self, a):
+#         self.a = a
+#
+#     def get_perimetr(self):
+#         return 4 * self.a
+#
+#
+# class Triangle:
+#     def __init__(self, a, b, c):
+#         self.a = a
+#         self.b = b
+#         self.c = c
+#
+#     def get_perimetr(self):
+#         return self.a + self.b + self.c
+#
+#
+# r1 = Rectangle(1, 2)
+# r2 = Rectangle(3, 4)
+# s1 = Square(10)
+# s2 = Square(20)
+# t1 = Triangle(1, 2, 3)
+# t2 = Triangle(4, 5, 6)
+# shape = [r1, r2, s1, s2, t1, t2]
+# for g in shape:
+#     print(g.get_perimetr())
+
+
+# s = [2, 5, 7]
+# m = max(s)
+# print(m)
+# s.remove(m)
+# print(s)
+# c1 = sum(s)
+# print(c1)
+
+
+# def control(a, b, c):
+#     s1 = [a, b, c]
+#     m1 = max(s1)
+#     s1.remove(m1)
+#     if m1 >= sum(s1):
+#         print('Это не треугольник')
+#
+#
+# control(2, 5, 7)
+
+# dz-38
+class Checking:
+    def __set_name__(self, owner, name):
+        self.name = name
+
+    def __get__(self, instance, owner):
+        return instance.__dict__[self.name]
+        # return getattr(instance, self.name)
+
+    def __set__(self, instance, value):
+        if not isinstance(value, int):
+            raise TypeError(f'Значение должно быть целым числом')
+        if value <= 0:
+            raise ValueError(f'Значение должно быть положительным числом больше нуля')
+        instance.__dict__[self.name] = value
+        # setattr(instance, self.name, value)
+
+# ??? Почему-то при использовании getattr и setattr код не работает
+
+class Triangle:
+    x = Checking()
+    y = Checking()
+    z = Checking()
+
+    def __init__(self, x, y, z):
+        self.x = x
+        self.y = y
+        self.z = z
+
+    def control(self):
+        lst = [self.x, self.y, self.z]
+        mx = max(lst)
+        lst.remove(mx)
+        if mx >= sum(lst):
+            print(f'Треугольник со сторонами ({self.x}, {self.y}, {self.z}) не существует')
+        else:
+            print(f'Треугольник со сторонами ({self.x}, {self.y}, {self.z}) существует')
+
+
+t1 = Triangle(2, 5, 6)
+t2 = Triangle(2, 5, 8)
+t3 = Triangle(7, 3, 6)
+t1.control()
+t2.control()
+t3.control()
