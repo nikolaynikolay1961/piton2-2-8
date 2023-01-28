@@ -1,7 +1,6 @@
 # Вложенные функции
 import random
 
-
 # def outer_fanc(who):
 #     def inner_func():
 #         print('Hello,', who)
@@ -4771,42 +4770,51 @@ import random
 # print(p.__dict__)
 # print(p.y)
 
-# создание модулей ____________=====+++++++++++++++++___________)))))))))
+#   -----------------ещё один вид дескриптора ( не данных)-------------------------------------
 
 
-# class Rectangle:
-#     def __init__(self, w, h):
-#         self.w = w
-#         self.h = h
+# class Integer:
+#     def __set_name__(self, owner, name):
+#         self.name = '_' + name
 #
-#     def get_perimetr(self):
-#         return 2 * (self.w + self.h)
-#
-#
-# class Square:
-#     def __init__(self, a):
-#         self.a = a
-#
-#     def get_perimetr(self):
-#         return 4 * self.a
+#     def __get__(self, instance, owner):
+#         # return instance.__dict__[self.name]
+#         return getattr(instance, self.name)
 #
 #
-# class Triangle:
-#     def __init__(self, a, b, c):
-#         self.a = a
-#         self.b = b
-#         self.c = c
+# class Point3D:
+#     x = Integer()
+#     y = Integer()
+#     z = Integer()
 #
-#     def get_perimetr(self):
-#         return self.a + self.b + self.c
+#     def __init__(self, x, y, z):
+#         self.x = x
+#         self.y = y
+#         self.z = z
 #
 #
-# r1 = Rectangle(1, 2)
-# r2 = Rectangle(3, 4)
-# s1 = Square(10)
-# s2 = Square(20)
-# t1 = Triangle(1, 2, 3)
-# t2 = Triangle(4, 5, 6)
+# p = Point3D(1, 2, 3)
+# print(p.__dict__)
+# print(p.y)
+
+#  ================= СОЗДАНИЕ СОБСТВЕННЫХ МОДУЛЕЙ ===============================
+
+# import geometry.rect
+# import geometry.sq
+# import geometry.trian
+# from geometry import rect, sq, trian
+# # from geometry import *
+#
+#
+# r1 = rect.Rectangle(1, 2)
+# r2 = rect.Rectangle(3, 4)
+#
+# s1 = sq.Square(10)
+# s2 = sq.Square(20)
+#
+# t1 = trian.Triangle(1, 2, 3)
+# t2 = trian.Triangle(4, 5, 6)
+#
 # shape = [r1, r2, s1, s2, t1, t2]
 # for g in shape:
 #     print(g.get_perimetr())
@@ -4832,47 +4840,319 @@ import random
 # control(2, 5, 7)
 
 # dz-38
-class Checking:
-    def __set_name__(self, owner, name):
-        self.name = name
-
-    def __get__(self, instance, owner):
-        return instance.__dict__[self.name]
-        # return getattr(instance, self.name)
-
-    def __set__(self, instance, value):
-        if not isinstance(value, int):
-            raise TypeError(f'Значение должно быть целым числом')
-        if value <= 0:
-            raise ValueError(f'Значение должно быть положительным числом больше нуля')
-        instance.__dict__[self.name] = value
-        # setattr(instance, self.name, value)
-
-# ??? Почему-то при использовании getattr и setattr код не работает
-
-class Triangle:
-    x = Checking()
-    y = Checking()
-    z = Checking()
-
-    def __init__(self, x, y, z):
-        self.x = x
-        self.y = y
-        self.z = z
-
-    def control(self):
-        lst = [self.x, self.y, self.z]
-        mx = max(lst)
-        lst.remove(mx)
-        if mx >= sum(lst):
-            print(f'Треугольник со сторонами ({self.x}, {self.y}, {self.z}) не существует')
-        else:
-            print(f'Треугольник со сторонами ({self.x}, {self.y}, {self.z}) существует')
+# class Checking:
+#     def __set_name__(self, owner, name):
+#         self.name = name
+#
+#     def __get__(self, instance, owner):
+#         return instance.__dict__[self.name]
+#         # return getattr(instance, self.name)
+#
+#     def __set__(self, instance, value):
+#         if not isinstance(value, int):
+#             raise TypeError(f'Значение должно быть целым числом')
+#         if value <= 0:
+#             raise ValueError(f'Значение должно быть положительным числом больше нуля')
+#         instance.__dict__[self.name] = value
+#         # setattr(instance, self.name, value)
+#
+# # ??? Почему-то при использовании getattr и setattr код не работает
+# <><><><>
+# условие проверки в дескрипторе можно сделать так:
+# class Checking:
+#     @staticmethod
+#     def verify_coord(coord):
+#         if not isinstance(coord, int) or coord <= 0:
+#             raise TypeError(f'Длина {coord} должна быть целым положительным числом больше нуля')
+#
+#     def __set_name__(self, owner, name):
+#         self.name = name
+#
+#     def __get__(self, instance, owner):
+#         return instance.__dict__[self.name]
+#
+#     def __set__(self, instance, value):
+#         self.verify_coord(value)
+#         instance.__dict__[self.name] = value
 
 
-t1 = Triangle(2, 5, 6)
-t2 = Triangle(2, 5, 8)
-t3 = Triangle(7, 3, 6)
-t1.control()
-t2.control()
-t3.control()
+
+
+
+# class Triangle:
+#     x = Checking()
+#     y = Checking()
+#     z = Checking()
+#
+#     def __init__(self, x, y, z):
+#         self.x = x
+#         self.y = y
+#         self.z = z
+#
+#     def control(self):
+#         lst = [self.x, self.y, self.z]
+#         mx = max(lst)
+#         lst.remove(mx)
+#         if mx >= sum(lst):
+#             print(f'Треугольник со сторонами ({self.x}, {self.y}, {self.z}) не существует')
+#         else:
+#             print(f'Треугольник со сторонами ({self.x}, {self.y}, {self.z}) существует')
+#
+#
+# t1 = Triangle(2, 5, 6)
+# t2 = Triangle(2, 5, 8)
+# t3 = Triangle(7, 3, 6)
+# t1.control()
+# t2.control()
+# t3.control()
+
+
+# from car import electrocar
+#
+#
+# def run():  # пример функционального программирования, когда весь код помещаем в функцию
+#     e_car = electrocar.ElectroCar('Tesla', 'T', 2020, 50000)
+#     e_car.model = 'S'  # можно менять значения
+#     e_car.show_car()
+#     e_car.description_battery()
+#
+#
+# if __name__ == '__main__':
+#     run()
+
+
+# можно три строки 4893-4895 поместить под if и тогда код нельзя нигде вызвать
+
+
+# ======================Упаковка данных=======================================
+
+# Кодирование данных-сериализация
+# Декодирование - десериализация
+
+# 1. marshal
+# 2. pickle
+# 3. json
+
+
+# dump- сохраняет данные в файл
+# load- считываем данные из открытого файла
+
+# dumps-сохраняет данные в строку(в памяти (оперативной) )
+# loads- считывает данные из строки(из памяти)
+
+
+import pickle
+
+# filename = 'basket.txt'
+#
+# shop_list = {
+#     'фрукты': ["яблоки", "манго"],
+#     'овощи': ['морковь'],
+#     "бюджет": 1000
+# }
+#
+# with open(filename, 'wb') as fh:
+#     pickle.dump(shop_list, fh)
+#     # fh.write(shop_list)  # так не работает
+#
+# with open(filename, 'rb') as fh:
+#     shop = pickle.load(fh)
+#
+# print(shop)
+
+
+# class Test:
+#     num = 35
+#     st = 'Привет'
+#     lst = [1, 2, 3]
+#     d = {'first': 'a', 'second': '2'}
+#     tpl = (22, 33)
+#
+#     def __str__(self):
+#         return f'Число: {Test.num}\nСтрока: {Test.st}\nСписок: {Test.lst}\n' \
+#                f'Словарь: {Test.d}\nКортеж: {Test.tpl}'
+#
+#
+# obj = Test()
+#
+# my_obj = pickle.dumps(obj)
+# print(f'Сериализация в строку: \n{my_obj}\n')
+#
+# l_obj = pickle.loads(my_obj)
+# print(f'Десериализация в строку: \n{l_obj}\n')
+
+# class Test2:
+#     def __init__(self):
+#         self.a = 35
+#         self.b = 'test'
+#         self.c = lambda x: x * x
+#
+#     def __str__(self):
+#         return f'{self.a} {self.b} {self.c(2)}'
+#
+#     def __getstate__(self):  # определяет то, что мы хотим обработать
+#         attr = self.__dict__.copy()  # создаём копию как бы init, к-рая хранится по другому адресу
+#         del attr['c']
+#         return attr
+#
+#     def __setstate__(self, state):  # добавляем данные, к-рые нам нужны
+#         self.__dict__ = state
+#         self.c = lambda x: x * x
+#
+#
+# item1 = Test2()
+# item2 = pickle.dumps(item1)
+# item3 = pickle.loads(item2)
+# print(item3.__dict__)
+# print(item3)
+
+
+# data = {
+#     'name': 'Igor',  # если Игорь, то в () дописать ensure_ascii=False в dumps
+#     # 'hobbies': ['running', 'sky diving'],
+#     'hobbies': ('running', 'sky diving'),  # в json-формате всё равно получается список
+#     'age': 20,
+#     'children': [
+#         {'firstName': 'Alice',
+#          'age': 5},
+#         {'firstName': 'Bob',
+#          'age': 8}
+#     ]
+#
+# }
+
+# with open('data_file.json', 'w') as fw:
+#     json.dump(data, fw, indent=4)
+#
+# with open('data_file.json', 'r') as fw:
+#     data = json.load(fw)
+#     print(data)
+
+# json_string = json.dumps(data)  # в () дописать ensure_ascii=False, если Игорь на русском
+# print(json_string)
+# data = json.loads(json_string)
+# print(data)
+
+
+
+
+# import json
+
+
+# from random import choice
+#
+#
+# def get_person():
+#     name = ''
+#     tel = ''
+#
+#     letter = ['a', 'b', 'c', 'd']
+#     nums = ['1', '2', '3', '4', '5']
+#
+#     while len(name) != 7:
+#         name += choice(letter)
+#     print(tel)
+#
+#     while len(tel) != 7:
+#         tel += choice(nums)
+#     print(tel)
+
+# -------------------------------------------------------------------------
+
+# class Student:
+#     def __init__(self, name, marks):
+#         self.name = name
+#         self.marks = marks
+#
+#     def __str__(self):
+#         # a = ""
+#         # for i in self.marks:
+#         #     a += f'{i},'
+#         a = ', '.join(map(str, self.marks))
+#         return f'Студент: {self.name}: {a}'
+#
+#     def add_marks(self, mark):
+#         self.marks.append(mark)
+#
+#     def delete_mark(self, index):
+#         self.marks.pop(index)
+#
+#     def edit_mark(self, index, new_mark):
+#         self.marks[index] = new_mark
+#
+#     def average_mark(self):
+#         return round(sum(self.marks) / len(self.marks), 2)
+#
+#
+# class Group:
+#     def __init__(self, students, group):
+#         self.students = students
+#         self.group = group
+#
+#     def __str__(self):
+#         # a = ''
+#         # for i in self.students:
+#         #     a += str(i) + '\n'
+#         a = '\n'.join(map(str, self.students))
+#         return f'Группа: {self.group} \n{a}'
+#
+#     def add_student(self, student):
+#         self.students.append(student)
+#
+#     def remove_student(self, index):
+#         return self.students.pop(index)
+#
+#
+# st1 = Student('Bodnya', [5, 4, 3, 4, 5, 3])
+# st2 = Student('Nikolaenko', [2, 3, 4, 5, 3])
+# st3 = Student('Birukov', [3, 4, 5, 3, 5, 5])
+# sts = [st1, st2]
+# my_group = Group(sts, 'ГК PYTHON')
+# print(my_group)
+
+
+# print(st1)
+# st1.add_marks(4)
+# print(st1)
+# st1.delete_mark(3)
+# print(st1)
+# st1.edit_mark(2, 4)
+# print(st1)
+# print(st1.average_mark())
+
+import json
+
+
+class Test:
+    num = 35
+    st = 'Привет'
+    lst = [1, 2, 3]
+    d = {'first': 'a', 'second': '2'}
+    tpl = (22, 33)
+    lam = lambda x: x * x
+
+    def __str__(self):
+        return f'Число: {Test.num}\nСтрока: {Test.st}\nСписок: {Test.lst}\n' \
+               f'Словарь: {Test.d}\nКортеж: {Test.tpl}\n Лямбда: {Test.lam(4)}'
+
+
+obj = Test()
+# print(obj)
+
+res = obj.__str__()
+# my_obj = json.dumps(obj, default=str)
+
+my_obj = json.dumps(res)
+print(f'Сериализация в строку: \n{my_obj}\n')
+
+l_obj = json.loads(my_obj)
+print(f'Де-сериализация в строку: \n{l_obj}\n')
+
+with open('test-json.txt', 'w') as fj:
+    json.dump(obj.__str__(), fj)
+
+with open('test-json.txt', 'r') as fj:
+    ob = json.load(fj)
+    print('Получаем:', ob)
+
+# В файле записано в виде бинарного кода
