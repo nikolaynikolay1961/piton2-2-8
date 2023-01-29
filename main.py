@@ -4876,9 +4876,6 @@ import random
 #         instance.__dict__[self.name] = value
 
 
-
-
-
 # class Triangle:
 #     x = Checking()
 #     y = Checking()
@@ -5033,30 +5030,84 @@ import pickle
 # data = json.loads(json_string)
 # print(data)
 
-
+#                  *************************************************
 
 
 # import json
-
-
+#
 # from random import choice
 #
 #
 # def get_person():
 #     name = ''
 #     tel = ''
+#     ind = ''
 #
-#     letter = ['a', 'b', 'c', 'd']
-#     nums = ['1', '2', '3', '4', '5']
+#     letter = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+#     nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+#     cod = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
 #
 #     while len(name) != 7:
 #         name += choice(letter)
-#     print(tel)
+#     # print(name)
 #
 #     while len(tel) != 7:
 #         tel += choice(nums)
-#     print(tel)
-
+#     # print(tel)
+#
+#     while len(ind) != 7:
+#         ind += choice(cod)
+#
+#     # person = {
+#     #     'name': name,
+#     #     'tel': tel
+#     # }
+#     # return person
+#     person = {
+#         ind: {
+#             'name': name,
+#             'tel': tel
+#         }
+#     }
+#     return person
+#
+#
+# # def write_json(person_dict):
+# #     try:
+# #         data = json.load(open('persons.json'))
+# #     except FileExistsError:
+# #         data = []
+# def write_json(person_dict):
+#     try:
+#         data = json.load(open('persons.json'))
+#     except FileNotFoundError:
+#         data = {}
+#
+#     data.update(person_dict)
+#     with open('persons.json', 'w') as f:
+#         json.dump(data, f, indent=2)
+# #
+# #     data.append(person_dict)
+# #     with open('persons.json', 'w') as f:
+# #         json.dump(data, f, indent=2)
+#
+#
+# # persons = []
+# # for i in range(5):
+# #     persons.append(get_person())
+#
+# # for i in range(5):
+# #     write_json(get_person())
+#
+# # with open('persons.json', 'w') as f:
+# #     json.dump(persons, f, indent=2)
+#
+#
+# persons = {}
+# for i in range(5):
+#     persons.update(get_person())
+#
+# # print(persons)
 # -------------------------------------------------------------------------
 
 # class Student:
@@ -5120,39 +5171,95 @@ import pickle
 # print(st1)
 # print(st1.average_mark())
 
+# DZ 39 ---------------------------
+
+# import json
+#
+#
+# class Test:
+#     num = 35
+#     st = 'Привет'
+#     lst = [1, 2, 3]
+#     d = {'first': 'a', 'second': '2'}
+#     tpl = (22, 33)
+#     lam = lambda x: x * x
+#
+#     def __str__(self):
+#         return f'Число: {Test.num}\nСтрока: {Test.st}\nСписок: {Test.lst}\n' \
+#                f'Словарь: {Test.d}\nКортеж: {Test.tpl}\n Лямбда: {Test.lam(4)}'
+#
+#
+# obj = Test()
+# # print(obj)
+#
+# res = obj.__str__()
+# # my_obj = json.dumps(obj, default=str)
+#
+# # rc = res.__dict__
+#
+# my_obj = json.dumps(res)
+# print(f'Сериализация в строку: \n{my_obj}\n')
+#
+# l_obj = json.loads(my_obj)
+# print(f'Де-сериализация в строку: \n{l_obj}\n')
+#
+# with open('test.json', 'w') as fj:
+#     json.dump(res, fj)
+#     print('что получилось:')
+#
+# with open('test.json', 'r') as fj:
+#     ob = json.load(fj)
+#     print('Получаем:', ob)
+#
+# # В файле записано в виде бинарного кода
+
 import json
 
-
-class Test:
-    num = 35
-    st = 'Привет'
-    lst = [1, 2, 3]
-    d = {'first': 'a', 'second': '2'}
-    tpl = (22, 33)
-    lam = lambda x: x * x
-
-    def __str__(self):
-        return f'Число: {Test.num}\nСтрока: {Test.st}\nСписок: {Test.lst}\n' \
-               f'Словарь: {Test.d}\nКортеж: {Test.tpl}\n Лямбда: {Test.lam(4)}'
+from random import choice
 
 
-obj = Test()
-# print(obj)
+def get_person():
+    name = ''
+    tel = ''
+    ind = ''
 
-res = obj.__str__()
-# my_obj = json.dumps(obj, default=str)
+    letter = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+    nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+    cod = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
 
-my_obj = json.dumps(res)
-print(f'Сериализация в строку: \n{my_obj}\n')
+    while len(name) != 7:
+        name += choice(letter)
+    # print(name)
 
-l_obj = json.loads(my_obj)
-print(f'Де-сериализация в строку: \n{l_obj}\n')
+    while len(tel) != 7:
+        tel += choice(nums)
+    # print(tel)
 
-with open('test-json.txt', 'w') as fj:
-    json.dump(obj.__str__(), fj)
+    while len(ind) != 7:
+        ind += choice(cod)
 
-with open('test-json.txt', 'r') as fj:
-    ob = json.load(fj)
-    print('Получаем:', ob)
+    person = {
+        ind: {
+            'name': name,
+            'tel': tel
+        }
+    }
+    return person
 
-# В файле записано в виде бинарного кода
+
+def write_json(person_dict):
+    try:
+        data = json.load(open('persons.json'))
+    except FileNotFoundError:
+        data = {}
+
+    data.update(person_dict)
+    with open('persons.json', 'w') as f:
+        json.dump(data, f, indent=2)
+
+
+persons = {}
+for i in range(3):
+    write_json(get_person())
+
+# print(persons)
