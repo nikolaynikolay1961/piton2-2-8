@@ -1,4 +1,5 @@
 # Вложенные функции
+import json
 import random
 
 # def outer_fanc(who):
@@ -5058,118 +5059,38 @@ import pickle
 #     while len(ind) != 7:
 #         ind += choice(cod)
 #
-#     # person = {
-#     #     'name': name,
-#     #     'tel': tel
-#     # }
-#     # return person
 #     person = {
-#         ind: {
-#             'name': name,
-#             'tel': tel
-#         }
+#         'name': name,
+#         'tel': tel
 #     }
 #     return person
 #
 #
-# # def write_json(person_dict):
-# #     try:
-# #         data = json.load(open('persons.json'))
-# #     except FileExistsError:
-# #         data = []
+#
 # def write_json(person_dict):
 #     try:
 #         data = json.load(open('persons.json'))
-#     except FileNotFoundError:
-#         data = {}
+#     except FileExistsError:
+#         data = []
 #
-#     data.update(person_dict)
+#
+#
+#
+#     data.append(person_dict)
 #     with open('persons.json', 'w') as f:
 #         json.dump(data, f, indent=2)
-# #
-# #     data.append(person_dict)
-# #     with open('persons.json', 'w') as f:
-# #         json.dump(data, f, indent=2)
 #
 #
 # # persons = []
 # # for i in range(5):
 # #     persons.append(get_person())
 #
-# # for i in range(5):
-# #     write_json(get_person())
+# for i in range(5):
+#     write_json(get_person())
 #
 # # with open('persons.json', 'w') as f:
 # #     json.dump(persons, f, indent=2)
-#
-#
-# persons = {}
-# for i in range(5):
-#     persons.update(get_person())
-#
-# # print(persons)
-# -------------------------------------------------------------------------
 
-# class Student:
-#     def __init__(self, name, marks):
-#         self.name = name
-#         self.marks = marks
-#
-#     def __str__(self):
-#         # a = ""
-#         # for i in self.marks:
-#         #     a += f'{i},'
-#         a = ', '.join(map(str, self.marks))
-#         return f'Студент: {self.name}: {a}'
-#
-#     def add_marks(self, mark):
-#         self.marks.append(mark)
-#
-#     def delete_mark(self, index):
-#         self.marks.pop(index)
-#
-#     def edit_mark(self, index, new_mark):
-#         self.marks[index] = new_mark
-#
-#     def average_mark(self):
-#         return round(sum(self.marks) / len(self.marks), 2)
-#
-#
-# class Group:
-#     def __init__(self, students, group):
-#         self.students = students
-#         self.group = group
-#
-#     def __str__(self):
-#         # a = ''
-#         # for i in self.students:
-#         #     a += str(i) + '\n'
-#         a = '\n'.join(map(str, self.students))
-#         return f'Группа: {self.group} \n{a}'
-#
-#     def add_student(self, student):
-#         self.students.append(student)
-#
-#     def remove_student(self, index):
-#         return self.students.pop(index)
-#
-#
-# st1 = Student('Bodnya', [5, 4, 3, 4, 5, 3])
-# st2 = Student('Nikolaenko', [2, 3, 4, 5, 3])
-# st3 = Student('Birukov', [3, 4, 5, 3, 5, 5])
-# sts = [st1, st2]
-# my_group = Group(sts, 'ГК PYTHON')
-# print(my_group)
-
-
-# print(st1)
-# st1.add_marks(4)
-# print(st1)
-# st1.delete_mark(3)
-# print(st1)
-# st1.edit_mark(2, 4)
-# print(st1)
-# print(st1.average_mark())
 
 # DZ 39 ---------------------------
 
@@ -5213,53 +5134,488 @@ import pickle
 #
 # # В файле записано в виде бинарного кода
 
-import json
+# =====------------------------------------------------------
 
-from random import choice
-
-
-def get_person():
-    name = ''
-    tel = ''
-    ind = ''
-
-    letter = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-    nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
-    cod = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
-
-    while len(name) != 7:
-        name += choice(letter)
-    # print(name)
-
-    while len(tel) != 7:
-        tel += choice(nums)
-    # print(tel)
-
-    while len(ind) != 7:
-        ind += choice(cod)
-
-    person = {
-        ind: {
-            'name': name,
-            'tel': tel
-        }
-    }
-    return person
-
-
-def write_json(person_dict):
-    try:
-        data = json.load(open('persons.json'))
-    except FileNotFoundError:
-        data = {}
-
-    data.update(person_dict)
-    with open('persons.json', 'w') as f:
-        json.dump(data, f, indent=2)
-
-
-persons = {}
-for i in range(3):
-    write_json(get_person())
+# # DZ-40
+# import json
+#
+# from random import choice
+#
+#
+# def get_person():
+#     name = ''
+#     tel = ''
+#     ind = ''
+#
+#     letter = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+#     nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+#     cod = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+#
+#     while len(name) != 7:
+#         name += choice(letter)
+#     # print(name)
+#
+#     while len(tel) != 7:
+#         tel += choice(nums)
+#     # print(tel)
+#
+#     while len(ind) != 7:
+#         ind += choice(cod)
+#
+#     person = {
+#         ind: {
+#             'name': name,
+#             'tel': tel
+#         }
+#     }
+#     return person
+#
+#
+# def write_json(person_dict):
+#     try:
+#         data = json.load(open('persons.json'))
+#     except FileNotFoundError:
+#         data = {}
+#
+#     data.update(person_dict)
+#     with open('persons.json', 'w') as f:
+#         json.dump(data, f, indent=2)
+#
+#
+# persons = {}
+# for i in range(3):
+#     write_json(get_person())
 
 # print(persons)
+
+# -------------------------------------------------------------------------
+
+#  Задача: Создать класс Student, с возможностью добавления, удаления, изменения оценок и
+#   подсчётом среднего балла.
+#   Создать класс Group, который принимает список студентов. Реализовать возможность добавления
+#   (удаления) студента в группу и перевода студента в другую группу
+#   Необходимо реализовать запись студентов в файл и возможность считывания данных из файла,
+#   а также запись данных в файл о группе студентов и считывание данных
+#
+
+#
+# import json
+#
+#
+# class Student:
+#     def __init__(self, name, marks):
+#         self.name = name
+#         self.marks = marks
+#
+#     def __str__(self):
+#         # return f'Студент: {self.name} {self.marks}'  # будет не то , что в задании
+#         # a = ""
+#         # for i in self.marks:
+#         #     a += f'{i}, '
+#                 a += str(i) + ", "
+#         a = ', '.join(map(str, self.marks))
+#         return f'Студент: {self.name}: {a}'  # {a[:-2]}  через map срез не нужен
+#
+#
+#     def add_marks(self, mark):  # добавляем оценку
+#         self.marks.append(mark)
+#
+#     def delete_mark(self, index):  # удаляем оценку
+#         self.marks.pop(index)
+#
+#     def edit_mark(self, index, new_mark):  # меняем оценку
+#         self.marks[index] = new_mark
+#
+#     def average_mark(self):  # средний балл
+#         return round(sum(self.marks) / len(self.marks), 2)
+#
+#     @staticmethod
+# def dump_to_json(stud, filenames):   # запись в файл для какого то конкретного студента
+#         try:
+#             data = json.load(open(filename))
+#         except FileNotFoundError:
+#             data = []
+#         data.append({'name': stud.name, 'marks': stud.marks})
+#         with open(filenames, 'w') as f:
+#             json.dump(data, f)
+#
+#     @staticmethod
+#     def load_to_file(filename):  # считывание файла
+#         with open(filename, 'r') as f:
+#             print(json.load(f))
+#
+#
+# class Group:
+#     def __init__(self, students, group):
+#         self.students = students
+#         self.group = group
+#
+#     def __str__(self):
+#         # a = ''
+#         # for i in self.students:
+#         #     a += str(i) + '\n'
+#         a = '\n'.join(map(str, self.students))
+#         return f'Группа: {self.group} \n{a}'
+#
+#     def add_student(self, student):  # добавляем студента
+#         self.students.append(student)
+#
+#     def remove_student(self, index):  # удаляем студента
+#         return self.students.pop(index)
+#
+#     @staticmethod
+#     def change_group(group1, group2, index):
+#         return group2.add_student(group1.remove_student(index))  # переводим студентов из группы в группу
+#
+#     @staticmethod
+#     def dump_group(file, group):  # запись группы в файл
+#         try:
+#             data = json.load(open(file))
+#         except FileNotFoundError:
+#             data = []
+#
+#         with open(file, 'w') as f:
+#             stud_list = []
+#             for i in group.students:
+#                 stud_list.append([i.name, i.marks])
+#             data.append(stud_list)
+#             json.dump(data, f, indent=2)
+#
+#
+#     @staticmethod
+#     def upload_jornal(file):
+#         with open(file, 'r') as f:
+#             print(json.load(f))
+#
+# #
+#
+# st1 = Student('Bodnya', [5, 4, 3, 4, 5, 3])
+# Student.dump_to_json(st1, 'student.json')
+# Student.load_to_file('student.json')
+
+# st2 = Student('Nikolaenko', [2, 3, 5, 4, 2])
+# Student.dump_to_json(st2, 'student.json')
+# Student.load_to_file('student.json')
+
+# st3 = Student('Birukov', [3, 4, 5, 3, 5, 5])
+# sts = [st1, st2]  # создаём список студентов, с которым будем работать!!!!
+# my_group = Group(sts, 'ГК PYTHON')  # создаём экземпляр класса Group
+# group22 = [st3]  # создаём ещё одну группу (для перевода студентов)
+# my_group.add_student(st3)
+# # print(my_group)
+# # print()
+# my_group.remove_student(1)
+# print(my_group)
+# my_group2 = Group(group22, 'ГК Web')
+# print(my_group2)
+# print()
+# Group.change_group(my_group, my_group2, 0)
+
+# Group.dump('group.json', my_group)
+# Group.dump('group.json', my_group2)
+# Group.upload_journal('group.json')
+# print(my_group)
+# print(my_group2)
+
+
+# print(st1)
+# st1.add_marks(4)
+# print(st1)
+# st1.delete_mark(3)
+# print(st1)
+# st1.edit_mark(2, 4)
+# print(st1)
+# print(st1.average_mark())
+
+
+# ======================= REQUESTS - модуль ===========================================
+
+# import requests
+# import json
+
+# response = requests.get('https://jsonplaceholder.typicode.com/todos')
+# todos = json.loads(response.text)
+#
+# # print(todos[:10])
+#
+# todos_by_user = {}
+#
+# for todo in todos:
+#     if todo['completed']:
+#         try:
+#             todos_by_user[todo['userId']] += 1
+#         except KeyError:
+#             todos_by_user[todo['userId']] = 1
+#
+# print(todos_by_user)  # тип todos является списком
+#
+# top_users = sorted(todos_by_user.items(), key=lambda x: x[1], reverse=True)
+# print(top_users)
+# # print(dict(top_users))
+#
+# max_complete = top_users[0][1]  # макс-ное кол-во задач, выполн-х одним пользователем
+# print(max_complete)
+#
+# users = []
+# for user, num_complete in top_users:
+#     if num_complete < max_complete:
+#         break
+#     users.append(str(user))
+#
+# # print(users)
+# max_users = ' and '.join(users)
+# print(max_users)
+#
+# s = 's' if len(users) > 1 else ' '
+# print(f'user{s} {max_users} completed {max_complete} TODOs')
+#
+#
+# def keep(tod):
+#     is_complete = tod['completed']
+#     has_max_count = str(tod['userId']) in users
+#     return is_complete and has_max_count
+#
+#
+# with open('filtered_data_file.json', 'w') as f:
+#     filtered_todos = list(filter(keep, todos))  # filter это метод
+#     json.dump(filtered_todos, f, indent=2)
+#
+# with open('filtered_data_file.json', 'r') as f:
+#     data = json.load(f)
+#     print(data)
+
+# =========  csv(Comma Separated Values) - переменные, разделённые запятыми ==========
+
+import csv
+
+# with open('data3.csv', 'r') as r_file:
+#     file_reader = csv.reader(r_file, delimiter=";")
+#     count = 0
+#     for row in file_reader:
+#         if count == 0:
+#             print(f'Файл содержит столбцы: {",".join(row)}')
+#         else:
+#             print(f"   {row[0]} - {row[1]}, Родился в {row[2]} году")
+#         count += 1
+#     print(f"Всего в файле {count} строк")
+
+# with open('data3.csv', 'r') as r_file:
+#     # field_name = ['Имя', ' Профессия', 'Год рождения']  # Если удалить первую строку в файле, то
+#     # file_reader = csv.DictReader(r_file, delimiter=";", fieldnames=field_name)  # запись такая
+#     file_reader = csv.DictReader(r_file, delimiter=";")
+#     count = 0
+#     for row in file_reader:
+#         # print(row)
+#         if count == 0:
+#             print(f'Файл содержит столбцы: {",".join(row)}')
+#
+#         print(f"   {row['Имя']} - {row[' Профессия']}, Родился в {row['Год рождения']} году")
+#         count += 1
+#     print(f"Всего в файле {count} строк")
+
+# with open("student.csv", mode='w') as f:
+#     writer = csv.writer(f, delimiter=";", lineterminator="\r")
+#     writer.writerow(["Имя", "Класс", "Возраст"])
+#     writer.writerow(["Женя", "9", "15"])
+#     writer.writerow(["Саша", "5", "12"])
+#     writer.writerow(["Маша", "11", "18"])
+
+# data = [['hostname', 'vendor', 'model', 'location'],
+#         ['sw1', 'Cisco', '3750', 'London, Best str'],
+#         ['sw2', 'Cisco', '3850', 'Liverpool, Better str'],
+#         ['sw3', 'Cisco', '3650', 'Liverpool, Better str'],
+#         ['sw4', 'Cisco', '3650', 'London, Best str']]
+#
+# with open('data_sw.csv', mode="w") as f:
+#     writer = csv.writer(f, delimiter=";", lineterminator="\r")
+#     # for row in data:
+#     #     writer.writerow(row)
+#     writer.writerows(data)  # запись, аналогичная циклу
+
+#
+# with open('data_sw.csv') as f:
+#     print(f.read())
+
+# with open('stud.csv', mode='w') as f:
+#     names = ['Имя', 'Возраст']
+#     file_writer = csv.DictWriter(f, delimiter=";", lineterminator="\r", fieldnames=names)
+#     file_writer.writeheader()
+#     file_writer.writerow({"Имя": "Саша", "Возраст": "6"})
+#     file_writer.writerow({"Имя": "Маша", "Возраст": "15"})
+#     file_writer.writerow({"Имя": "Вова", "Возраст": "14"})
+#
+# data = [{
+#     'hostname': 'sw1',
+#     'location': 'London',
+#     'model': '3750',
+#     'vendor': 'Cisco'
+# }, {
+#     'hostname': 'sw2',
+#     'location': 'Liverpool',
+#     'model': '3850',
+#     'vendor': 'Cisco'
+# }, {
+#     'hostname': 'sw3',
+#     'location': 'Liverpool',
+#     'model': '3650',
+#     'vendor': 'Cisco'
+# }, {
+#     'hostname': 'sw4',
+#     'location': 'London',
+#     'model': '3650',
+#     'vendor': 'Cisco'
+# }]
+#
+# with open('dictwriter_.csw', 'w') as f:
+#     writer = csv.DictWriter(f, delimiter=";", lineterminator="\r", fieldnames=list(data[0].keys()))
+#     writer.writeheader()
+#     for d in data:
+#         writer.writerow(d)
+
+
+# ----------------------------------------------------------------------------------------------
+
+# DZ-41
+# import json
+#
+# print(' Составьте список словарей: {Страна: Столица}')
+# print()
+# print("""Список команд для управления словарём:
+#     1 - добавление данных
+#     2 - удаление данных
+#     3 - поиск данных
+#     4 - редактирование данных
+#     5 - просмотр данных
+#     6 - завершение работы""")
+#
+#
+# class Checking:
+#     def __set_name__(self, owner, name):
+#         self.name = name
+#
+#     def __get__(self, instance, owner):
+#         return instance.__dict__[self.name]
+#
+#     def __set__(self, instance, value):
+#         if not isinstance(value, str):
+#             raise TypeError(f'Значение должно быть словом ')
+#         if not str.istitle:
+#             raise TypeError(f'слово должно быть с заглавной буквы')
+#         instance.__dict__[self.name] = value
+#
+#
+# class Country:
+#     country = Checking()
+#     capital = Checking()
+#
+#     def __init__(self, country, capital):
+#         self.country = country
+#         self.capital = capital
+#
+#     def litd(self, country, capital):
+#         list_dict = {country: capital}
+#         return list_dict
+#
+#     def __str__(self):
+#         return f'Страна: {self.country}, столица: {self.capital}'
+#
+#     number = None
+#     while number != 6:
+#         number = i = int(input('Введите номер операции:'))
+#         if number == 1:
+#             k = input('Введите название страны:')
+#             v = input('Введите название столицы:')
+#             s = {k: v}
+#             try:
+#                 s1 = json.load(open('countries.json'))
+#             except FileNotFoundError:
+#                 s1 = []
+#
+#             s1.append(s)
+#             with open('countries.json', 'w', encoding='utf-8') as f:
+#                 json.dump(s1, f, indent=2, ensure_ascii=False)
+#
+#         if number == 2:
+#             k1 = input('Введите название страны для удаления:')
+#             # k2 = input('ВВедите название столицы для удаления')
+#             s1.dict.popitem(k1)
+#
+#
+#         if number == 6:
+#             print('Работа завершена')
+#             break
+#
+#
+# c = Country('Россия', 'Москва')
+
+# Парсинг --------------------------------------------------------------------------------
+
+
+# from bs4 import BeautifulSoup
+# import re
+#
+#
+# # def get_copywriter(tag):
+# #     whois = tag.find("div", class_="whois").text.strip()
+# #     if "Copywriter" in whois:
+# #         return tag
+# #     return None
+#
+# def get_salary(s):
+#     pattern = r"\d+"
+#     # res = re.search(pattern, s).group()
+#     res = re.findall(pattern, s)[0]  # получим то же самое
+#     print(res)
+#
+#
+# f = open('index.html', encoding='utf-8').read()
+# soup = BeautifulSoup(f, 'html.parser')
+#
+# salary = soup.find_all("div", {"data-set": "salary"})
+# for i in salary:
+#     # print(i.text)
+#     get_salary(i.text)
+# print(salary)
+
+# copywriter = []
+# row = soup.find_all('div', class_='row')
+# for i in row:
+#     cw = get_copywriter(i)
+#     if cw:
+#         copywriter.append(cw)
+#
+# print(copywriter)
+# row = soup.find('div', class_='name').text  # ищет первый найденный элемент
+# row = soup.find_all('div', class_='name')  # все элементы
+# for r in row:
+#     print(r.text)
+# print(row)
+# row = soup.find_all('div', class_='row')[1].find('div', class_='links')
+# print(row)
+#
+# row = soup.find_all("div", {"data-set": "salary"})[1].text  # т.е. можно по и по индексу и с text
+# print(row)
+#
+# row = soup.find("div", string="Alena").parent  # получаем родительский документ
+# print(row)
+# row = soup.find("div", string="Alena").find_parent(class_="row")  # то же самое
+# print(row)
+
+# row = soup.find("div", id="whois3")
+# row = soup.find("div", id="whois3").text
+# row = soup.find("div", id="whois3").find_next_sibling()  # следующий элемент на одном уровне
+# row = soup.find("div", id="whois3").find_previous_sibling()  # предыдущий элемент на одном уровне
+#
+# print(row)
+
+
+#DZ-42
+data = [['hostname', 'vendor', 'model', 'location'],
+        ['sw1', 'Cisco', '3750', 'London'],
+        ['sw2', 'Cisco', '3850', 'Liverpool'],
+        ['sw3', 'Cisco', '3650', 'Liverpool'],
+        ['sw4', 'Cisco', '3650', 'London']]
+
+with open('dz_42.csv', mode="w") as f:
+    writer = csv.writer(f, delimiter=";", lineterminator="\r")
+    writer.writerows(data)
