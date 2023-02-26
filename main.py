@@ -5502,11 +5502,12 @@ import csv
 #         if not str.istitle:
 #             raise TypeError(f'слово должно быть с заглавной буквы')
 #         instance.__dict__[self.name] = value
-#
-#
+
+
 # class Country:
 #     country = Checking()
 #     capital = Checking()
+#     number = int(input('Введите номер операции:'))
 #
 #     def __init__(self, country, capital):
 #         self.country = country
@@ -5518,32 +5519,43 @@ import csv
 #
 #     def __str__(self):
 #         return f'Страна: {self.country}, столица: {self.capital}'
+
+# def load_dict(self):
+#     k = input('Введите название страны:')
+#     v = input('Введите название столицы:')
+#     s = {k: v}
+#     try:
+#         s1 = json.load(open('countries.json'))
+#     except FileNotFoundError:
+#         s1 = []
 #
-#     number = None
-#     while number != 6:
-#         number = i = int(input('Введите номер операции:'))
-#         if number == 1:
-#             k = input('Введите название страны:')
-#             v = input('Введите название столицы:')
-#             s = {k: v}
-#             try:
-#                 s1 = json.load(open('countries.json'))
-#             except FileNotFoundError:
-#                 s1 = []
+#     s1.append(s)
+#     with open('countries.json', 'w', encoding='utf-8') as f:
+#         json.dump(s1, f, indent=2, ensure_ascii=False)
 #
-#             s1.append(s)
-#             with open('countries.json', 'w', encoding='utf-8') as f:
-#                 json.dump(s1, f, indent=2, ensure_ascii=False)
+#     def variant(self, number):
+#         while number != 6:
+#             if number == 1:
+#                 k = input('Введите название страны:')
+#                 v = input('Введите название столицы:')
+#                 s = {k: v}
+#                 try:
+#                     s1 = json.load(open('countries.json'))
+#                 except FileNotFoundError:
+#                     s1 = []
 #
-#         if number == 2:
-#             k1 = input('Введите название страны для удаления:')
-#             # k2 = input('ВВедите название столицы для удаления')
-#             s1.dict.popitem(k1)
+#                 s1.append(s)
+#                 with open('countries.json', 'w', encoding='utf-8') as f:
+#                     json.dump(s1, f, indent=2, ensure_ascii=False)
 #
+#                 if number == 2:
+#                     k1 = input('Введите название страны для удаления:')
+#                 # k2 = input('ВВедите название столицы для удаления')
+#                     s1.dict.popitem(k1)
 #
-#         if number == 6:
-#             print('Работа завершена')
-#             break
+#             if number == 6:
+#                 print('Работа завершена')
+#                 break
 #
 #
 # c = Country('Россия', 'Москва')
@@ -5609,13 +5621,224 @@ import csv
 # print(row)
 
 
-#DZ-42
-data = [['hostname', 'vendor', 'model', 'location'],
-        ['sw1', 'Cisco', '3750', 'London'],
-        ['sw2', 'Cisco', '3850', 'Liverpool'],
-        ['sw3', 'Cisco', '3650', 'Liverpool'],
-        ['sw4', 'Cisco', '3650', 'London']]
+# #DZ-42
+# data = [['hostname', 'vendor', 'model', 'location'],
+#         ['sw1', 'Cisco', '3750', 'London'],
+#         ['sw2', 'Cisco', '3850', 'Liverpool'],
+#         ['sw3', 'Cisco', '3650', 'Liverpool'],
+#         ['sw4', 'Cisco', '3650', 'London']]
+#
+# with open('dz_42.csv', mode="w") as f:
+#     writer = csv.writer(f, delimiter=";", lineterminator="\r")
+#     writer.writerows(data)
 
-with open('dz_42.csv', mode="w") as f:
-    writer = csv.writer(f, delimiter=";", lineterminator="\r")
-    writer.writerows(data)
+# =================== парсинг урок № 2 ======================================== 07.02.2023 =====
+
+# import requests
+
+
+# r = requests.get('https://ru.wordpress.org/')
+# # print(r)
+# # print(r.headers)
+# # print(r.headers['Content-Type'])
+# # print(r.content)  # в бинарном виде
+# print(r.text)  # читаемый вид
+
+# создаём точку входа
+# import requests
+# from bs4 import BeautifulSoup
+#
+#
+# def get_data(html):
+#     soup = BeautifulSoup(html, 'lxml')  # 'html.parser' меняем на 'lxml'
+#     p1 = soup.find('header', id="masthead").find('p', class_="site-title").text
+#     return p1
+#
+#
+# def get_html(url):
+#     r = requests.get(url)
+#     return r.text
+#
+#
+# def main():
+#     url = 'https://ru.wordpress.org/'
+#     print(get_data(get_html(url)))
+#
+#
+# if __name__ == '__main__':
+#     main()
+
+# ---------------- изменим вышестоящий код ----------------------------------
+# import requests
+# from bs4 import BeautifulSoup
+# import re
+# import csv
+#
+#
+# def refined(s):
+#     res = re.sub(r"\D+", "", s)
+#     return res
+#
+# def write_csv(data):
+#     with open("plugins.csv", 'a') as f:
+#         writer = csv.writer(f, lineterminator="\r", delimiter=";")
+#         writer.writerow((data['name'], data['url'], data['rating']))
+#
+# def get_data(html):
+#     soup = BeautifulSoup(html, 'lxml')  # 'html.parser' меняем на 'lxml'
+#     p1 = soup.find_all('section', class_='plugin-section')[3]
+#     plugins = p1.find_all('article')
+#
+#     for plugin in plugins:
+#         name = plugin.find('h3').text
+#         url = plugin.find('h3').find('a').get('href')  # ['href']
+#         rating = plugin.find('span', class_='rating-count').find('a').text
+#         r = refined(rating)
+#         data = {'name': name, 'url': url, 'rating': r}
+#         write_csv(data)
+#     # return len(plugins)
+#
+#
+# def get_html(url):
+#     r = requests.get(url)
+#     return r.text
+#
+#
+# def main():
+#     url = 'https://ru.wordpress.org/plugins/'
+#     (get_data(get_html(url)))
+#
+#
+# if __name__ == '__main__':
+#     main()
+
+
+# -------------------07.02/2023  2-ая часть 86-ой пары-------------------------------------------
+#
+# import requests
+# from bs4 import BeautifulSoup
+# import csv
+#
+#
+# def get_html(url):
+#     r = requests.get(url)
+#     return r.text
+#
+#
+# def refine_cy(s):
+#     return s.split()[-1]
+#
+#
+# def write_csv(data):
+#     with open("plugins1.csv", 'a') as f:
+#         writer = csv.writer(f, lineterminator="\r", delimiter=";")
+#         writer.writerow((data['name'], data['url'], data['snippet'], data['cy']))
+#
+#
+# def get_data(html):
+#     soup = BeautifulSoup(html, 'lxml')  # 'html.parser' меняем на 'lxml'
+#     elements = soup.find_all("article", class_="plugin-card")
+#     for el in elements:
+#         try:
+#             name = el.find("h3").text
+#         except ValueError:
+#             name = ""
+#
+#         try:
+#             url = el.find("h3").find("a").get('href')
+#         except ValueError:
+#             url = ""
+#
+#         try:
+#             snippet = el.find("div", class_="entry-excerpt").text.strip()
+#         except ValueError:
+#             snippet = ""
+#
+#         try:
+#             c = el.find("span", class_="tested-with").text.strip()
+#             cy = refine_cy(c)
+#         except ValueError:
+#             cy = ""
+#
+#         data1 = {
+#             'name': name,
+#             'url': url,
+#             'snippet': snippet,
+#             'cy': cy
+#         }
+#         write_csv(data1)
+#
+#
+# def main():
+#     for i in range(1, 5):
+#         url = f'https://ru.wordpress.org/plugins/browse/blocks/page{i}/'
+#         get_data(get_html(url))
+#
+#
+# if __name__ == '__main__':
+#     main()
+
+# ----------------90-ая пара ---------------------------------------
+
+import sqlite3 as sq
+
+#
+# # con = sq.connect("profile.db")
+# # cur = con.cursor()
+# #
+# # cur.execute("""
+# # """)
+# #
+# #
+# # con.close()
+#
+# with sq.connect('profile.db') as con:
+#     cur = con.cursor()
+#     cur.execute('''CREATE TABLE IF NOT EXISTS users(
+#     id INTEGER PRIMARY KEY AUTOINCREMENT,
+#     name TEXT NOT NULL,
+#     summa REAL,
+#     data BLOB
+#     )''')  # то - же самое, но с автоматическим закрытием. users-это название таблицы
+#     cur.execute("DROP TABLE users")  # удаление базы данных из таблицы
+
+with sq.connect('users.db') as con:
+    cur = con.cursor()
+#  переименование таблицы
+    # cur.execute("""
+    # ALTER TABLE person
+    # RENAME TO person_table
+    # """)
+#  добавление колонки
+#     cur.execute("""
+#     ALTER TABLE person_table
+#     ADD COLUMN address TEXT NOT NULL DEFAULT 'street'
+#     """)
+#  переименование колонки
+#     cur.execute("""
+#        ALTER TABLE person_table
+#        RENAME COLUMN address TO home_address
+#        """)
+
+# удаление столбца
+#     cur.execute("""
+#     ALTER TABLE person_table
+#     DROP COLUMN home_address
+#     """)
+#  УДАЛЕНИЕ ТАБЛИЦЫ
+#     cur.execute("""
+#     DROP TABLE person_table
+#     """)
+
+
+
+ # DEFAULT 'street'- если строки уже есть в таблице
+
+#     cur.execute('''CREATE TABLE IF NOT EXISTS person(
+#     id INTEGER PRIMARY KEY AUTOINCREMENT,
+#     name TEXT NOT NULL,
+#     phon BLOB NOT NULL DEFAULT '+79090000000',
+#     age INTEGER NOT NULL CHECK(age>15 AND age<70),
+#     email TEXT UNIQUE
+#     )''')  # то - же самое, но с автоматическим закрытием. person -это название таблицы
+# #     DEFAULT - это значение по умолчанию
