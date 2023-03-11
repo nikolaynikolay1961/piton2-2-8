@@ -5386,7 +5386,7 @@ import pickle
 
 # =========  csv(Comma Separated Values) - переменные, разделённые запятыми ==========
 
-import csv
+# import csv
 
 # with open('data3.csv', 'r') as r_file:
 #     file_reader = csv.reader(r_file, delimiter=";")
@@ -5580,7 +5580,7 @@ import csv
 #     print(res)
 #
 #
-# f = open('index.html', encoding='utf-8').read()
+# f = open('index2.html', encoding='utf-8').read()
 # soup = BeautifulSoup(f, 'html.parser')
 #
 # salary = soup.find_all("div", {"data-set": "salary"})
@@ -5780,7 +5780,7 @@ import csv
 
 # ----------------90-ая пара ---------------------------------------
 
-import sqlite3 as sq
+# import sqlite3 as sq
 
 #
 # # con = sq.connect("profile.db")
@@ -5802,13 +5802,13 @@ import sqlite3 as sq
 #     )''')  # то - же самое, но с автоматическим закрытием. users-это название таблицы
 #     cur.execute("DROP TABLE users")  # удаление базы данных из таблицы
 
-with sq.connect('users.db') as con:
-    cur = con.cursor()
+# with sq.connect('users.db') as con:
+#     cur = con.cursor()
 #  переименование таблицы
-    # cur.execute("""
-    # ALTER TABLE person
-    # RENAME TO person_table
-    # """)
+# cur.execute("""
+# ALTER TABLE person
+# RENAME TO person_table
+# """)
 #  добавление колонки
 #     cur.execute("""
 #     ALTER TABLE person_table
@@ -5831,8 +5831,7 @@ with sq.connect('users.db') as con:
 #     """)
 
 
-
- # DEFAULT 'street'- если строки уже есть в таблице
+# DEFAULT 'street'- если строки уже есть в таблице
 
 #     cur.execute('''CREATE TABLE IF NOT EXISTS person(
 #     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -5842,3 +5841,252 @@ with sq.connect('users.db') as con:
 #     email TEXT UNIQUE
 #     )''')  # то - же самое, но с автоматическим закрытием. person -это название таблицы
 # #     DEFAULT - это значение по умолчанию
+
+# with sq.connect('db_3.db') as con:
+#     cur = con.cursor()
+#     cur.execute('''
+#     SELECT *
+#     FROM T1
+#     ORDER BY FName
+#     LIMIT 2, 5
+#      ''')
+#
+#     # res = cur.fetchall()  # получаем все записи
+#     # print(res)
+#     # for res in cur:
+#     #     print(res)
+#
+#     res = cur.fetchone()  # получаем одну запись
+#     res2 = cur.fetchmany(3)
+#     res3 = cur.fetchall()
+#     print(res)
+#     print(res2)
+#     print(res3)
+
+# ----------------------------шаблонизатор 02.03.2023------------------------------------
+
+
+# from jinja2 import Template
+
+# name = 'Игорь'
+# age = 28
+
+# per = {'name': 'Игорь', 'age': 28}
+
+# class Person:
+#     def __init__(self, name, age):
+#         self.__name = name
+#         self.__age = age
+#
+#     def get_name(self):
+#         return self.__name
+#
+#     def get_age(self):
+#         return self.__age
+#
+#
+# per = Person('Игорь', 26)
+#
+# # tm = Template('Мне {{a*2}} лет. Меня зовут {{ n.upper() }}.')
+# # tm = Template('Мне {{p.age}} лет. Меня зовут {{ p.name.upper() }}.')  # or p[name]
+# tm = Template('Мне {{p.get_age()}} лет. Меня зовут {{ p.get_name().upper() }}.')  # or p[name]
+# # msg = tm.render(n=name, a=age)
+# msg = tm.render(p=per)
+# print(msg)
+
+#        {%  %}  спецификатор шаблона ---!!!!!!
+#         {#  #}  блок комментариев
+
+#  {%  for <выражение> %}
+#  <тело цикла>
+#  {% endfor %}
+
+
+# cities = [
+#     {'id': 1, 'city': 'Москва'},
+#     {'id': 2, 'city': 'Смоленск'},
+#     {'id': 3, 'city': 'Минск'},
+#     {'id': 4, 'city': 'Ярославль'},
+#     {'id': 5, 'city': 'Уфа'}
+# ]
+#
+# link = """<select name='cities'>
+# {% for c in cities -%}
+# {% if c.id > 3 -%}
+#     <option value="{{c.id}}">{{c['city']  }}</option>
+# {% elif c.city == 'Москва'%}
+#     <option>{{ c['city']  }}</option>
+# {% else -%}
+#     {{c['city']}}
+# {% endif -%}
+# {% endfor -%}
+# </select>"""
+#
+# tm = Template(link)
+# msg = tm.render(cities=cities)
+# print(msg)
+
+#  {% if <условие>  %}
+#
+#  {% elif <условие> %}
+#
+#  {% else %}
+#
+#  {% endif%}
+
+# задача ------------
+#  Выведите список из пунктов меню и ссылок. Представьте, что
+#  активный пункт меню - Главная (добавьте к нему class="active")
+# <ul>
+# <li><a href="/index" class="active">Главная</li>
+# <li><a href="/news">Новости</li>
+# <li><a href="/about">О компании</li>
+# <li><a href="/shop">Магазин</li>
+# <li><a href="/contacts">Контакты</li>
+# </ul>
+
+# menu = [{'id': 'index', 'title': 'Главная'},
+#         {'id': 'news', 'title': 'Новости'},
+#         {'id': 'about', 'title': 'О компании'},
+#         {'id': 'shop', 'title': 'Магазин'},
+#         {'id': 'contacts', 'title': 'Контакты'},
+#         ]
+# link = """<ul>
+# {%for i in menu -%}
+# {%if i.title=='Главная'-%}
+# <li><a href="/{{i.id}}" class="active">{{i.title}}</a></li>
+# {%else-%}
+# <li><a href="/{{i.id}}">{{i.title}}</a></li>
+# {%endif-%}
+# {%endfor-%}
+# </ul>"""
+# tm = Template(link)
+# msg = tm.render(menu=menu)
+# print(msg)
+
+#  ------------------фильтры-------------------------------
+
+# cars = [
+#     {'model': 'Audi', 'price': 23000},
+#     {'model': 'Skoda', 'price': 17300},
+#     {'model': 'Renault', 'price': 44300},
+#     {'model': 'Wolksvagen', 'price': 21300}
+# ]
+
+# tp1 = "Суммарная цена автомобилей {{ cs | sum(attribute='price') }}"
+# tp1 = "Суммарная цена автомобилей {{ cs | max(attribute='price') }}"
+# tp1 = "Самые дорогие автомобили: {{ (cs | max(attribute='price')).model }}"
+# tp1 = "Самые дешёвые автомобили: {{ (cs | min(attribute='price')).model }}"
+# tp1 = "{{ cs | random}}"
+# tp1 = "{{ cs | replace('model', 'brand')}}"
+#
+# tm = Template(tp1)
+# msg = tm.render(cs=cars)
+#
+# print(msg)
+# print(sum(map(lambda x: x['price'], cars)))
+
+
+#  макроопределение - это как функция -------------{% macro %}
+
+# html = """
+# {% macro input(name, value='', type='text', size=20) %}
+#     <input type='{{ type}}' name='{{name}}' value='{{ value }}' size='{{ size}}' >
+# {% endmacro %}
+#
+# <p>{{input('username', 'Ann')}}</p>
+# <p>{{input('email')}}</p>
+# <p>{{input('password', type='password')}}</p>
+# """
+#
+# tm = Template(html)
+# msg = tm.render()
+#
+# print(msg)
+
+# # Задача -------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# #    Создайте макроопределение для поей ввода input в шаблоне html-документа
+# #
+# #     < p > {{input('firstname', placeholder="Имя")}} < / p >
+# #     < p > {{input('lastname', placeholder="Фамилия")}} < / p >
+# #     < p > {{input('address', placeholder="Адрес")}} < / p >
+# #     < p > {{input('phone', type='tel', placeholder="Телефон")}} < / p >
+# #     < p > {{input('email', type='email', placeholder="Почта")}} < / p >
+#
+# html = """
+# {% macro func (name, type='text', placeholder='') -%}
+#     <input type='{{ type }}' name='{{ name }}' placeholder='{{ placeholder }}'>
+# {% endmacro %}
+#
+# <p>{{ func('firstname', placeholder="Имя") }}</p>
+# <p>{{ func('lastname', placeholder="Фамилия") }}</p>
+# <p>{{ func('address', placeholder="Адрес") }}</p>
+# <p>{{ func('phone', type='tel', placeholder="Телефон") }}</p>
+# <p>{{ func('email', type='email', placeholder="Почта") }}</p>
+#     """
+# tm = Template(html)
+# msg = tm.render()
+#
+# print(msg)
+#--------------             ----------------------                   ---------------------
+#
+# persons = [
+#     {"name": "Алексей", "year": 18, "weight": 78.5},
+#     {"name": "Никита", "year": 28, "weight": 82.3},
+#     {"name": "Виталий", "year": 33, "weight": 94.0}
+# ]
+#
+# html = '''
+# {% macro list_users(list_of_users) %}
+# <ul>
+# {% for u in list_of_users -%}
+#     <li>{{ u.name}} {{ caller(u) }}</li>  # добавили {{ caller(u) }} --- !!!!!
+# {% endfor %}
+# </ul>
+# {% endmacro %}
+#
+# {% call(user) list_users(users)%}
+#     <ul>
+#         <li>{{user.year}}</li>
+#         <li>{{user.weight}}</li>
+#     </ul>
+# {% endcall %}
+# '''
+#
+#
+# tm = Template(html)
+# msg = tm.render(users=persons)
+#
+# print(msg)
+
+#  {% call[параметры ] <вызов макроса > %} ---------!!!!!!!!
+# < вложенный шаблон>
+# {% endcall %}
+
+
+from jinja2 import Environment, FileSystemLoader
+
+# persons = [
+#     {"name": "Алексей", "year": 18, "weight": 78.5},
+#     {"name": "Никита", "year": 28, "weight": 82.3},
+#     {"name": "Виталий", "year": 33, "weight": 94.0}
+# ]
+#
+# file_loader = FileSystemLoader('Template')
+# env = Environment(loader=file_loader)
+#
+# tm = env.get_template('main.html')
+# msg = tm.render(users=persons, title='About Jinja')
+#
+# print(msg)
+
+
+file_loader = FileSystemLoader('templates2')
+env = Environment(loader=file_loader)
+
+tm = env.get_template('main2.html')
+msg = tm.render(title='Домашнее задание', h='Страница с домашним заданием',
+                p='Домашнее задание выполнено')
+
+print(msg)
+
